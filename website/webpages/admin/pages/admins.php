@@ -1,37 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard</title>
-    <!-- Include the header component -->
-    <?php include_once '../components/header.php'; ?>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <!-- Include the header component -->
+  <?php include_once '../components/header.php';?>
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+  <div class="wrapper">
 
-        <!-- Include the bars component -->
-        <?php include_once '../components/bars.php'; ?>
+    <!-- Include the bars component -->
+    <?php include_once '../components/bars.php';?>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" style="margin-top: 50px;">
-            <!-- Content Header (Page header) -->
-
-
-            <!-- Main content -->
-            <!-- Content Header -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="margin-top: 50px;">
+        <!-- Main content -->
+        <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Parents Page</h1>
+                            <h1 class="m-0">Admins Page</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item active">
-                                    <a href="create_parent.php"><button class="btn btn-primary" type="button">Create parent</button></a>
+                                    <a href="create_admin.php"><button class="btn btn-primary" type="button">Create Admin</button></a>
                                 </li>
                             </ol>
                         </div>
@@ -46,7 +41,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Parents</h3>
+                                    <h3 class="card-title">Admins</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="col-sm-12 col-md-6 mb-3">
@@ -57,7 +52,7 @@
                                                     type="search"
                                                     id="classSearchInput"
                                                     class="form-control form-control-sm"
-                                                    placeholder="Search for classes..."
+                                                    placeholder="Search for Admins..."
                                                     aria-controls="example1" />
                                             </label>
                                         </div>
@@ -146,18 +141,18 @@
                     </div>
                 </div>
             </section>
-        </div>
-        <!-- /.content-wrapper -->
-
-        <!-- Include the footer component -->
-        <?php include_once '../components/footer.php'; ?>
+      
     </div>
-    <!-- ./wrapper -->
+    <!-- /.content-wrapper -->
 
-    <!-- // Include the scripts component -->
-    <?php include_once '../components/scripts.php'; ?>
-    <!-- // Include the charts data component -->
-    <?php include_once '../components/chartsData.php'; ?>
+    <!-- Include the footer component -->
+    <?php include_once '../components/footer.php';?>
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- // Include the scripts component -->
+  <?php include_once '../components/scripts.php';?>
+  <!-- // Include the charts data component -->
+  <?php include_once '../components/chartsData.php';?>
 </body>
-
 </html>

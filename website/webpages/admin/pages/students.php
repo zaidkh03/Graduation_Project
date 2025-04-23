@@ -17,21 +17,17 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="margin-top: 50px;">
-            <!-- Content Header (Page header) -->
-
-
-            <!-- Main content -->
             <!-- Content Header -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Parents Page</h1>
+                            <h1 class="m-0">Students Page</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item active">
-                                    <a href="create_parent.php"><button class="btn btn-primary" type="button">Create parent</button></a>
+                                    <a href="create_student.php"><button class="btn btn-primary" type="button">Create Student</button></a>
                                 </li>
                             </ol>
                         </div>
@@ -46,7 +42,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Parents</h3>
+                                    <h3 class="card-title">Students</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="col-sm-12 col-md-6 mb-3">
@@ -57,7 +53,7 @@
                                                     type="search"
                                                     id="classSearchInput"
                                                     class="form-control form-control-sm"
-                                                    placeholder="Search for classes..."
+                                                    placeholder="Search for Students..."
                                                     aria-controls="example1" />
                                             </label>
                                         </div>
@@ -68,9 +64,9 @@
                                         <thead style="background-color: #343a40; color: white">
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone number</th>
+                                                <th>NAME</th>
+                                                <th>CLASS ID</th>
+                                                <th>GRADE</th>
                                                 <th>Changes</th>
                                             </tr>
                                         </thead>
@@ -79,7 +75,7 @@
                                                 <td>1</td>
                                                 <td>tenth grade</td>
                                                 <td>A</td>
-                                                <td>25</td>
+                                                <td>5</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
@@ -95,7 +91,7 @@
                                                 <td>2</td>
                                                 <td>ggg</td>
                                                 <td>B</td>
-                                                <td>25</td>
+                                                <td>2</td>
                                                 <td style="text-align: center">
                                                     <ion-icon
                                                         name="create-outline"
@@ -109,7 +105,7 @@
                                                 <td></td>
                                                 <td>nin</td>
                                                 <td>B</td>
-                                                <td>25</td>
+                                                <td>10</td>
                                                 <td style="text-align: center; width: 150px">
                                                     <button
                                                         type="button"
@@ -145,7 +141,19 @@
                         </div>
                     </div>
                 </div>
+            </section><!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Admin Dashboard</h1>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
             </section>
+
+            <!-- Main content -->
+
         </div>
         <!-- /.content-wrapper -->
 

@@ -32,43 +32,100 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Registration</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <!-- Include the header component -->
+  <?php include_once '../components/header.php';?>
 </head>
-<body class="bg-light">
-  <div class="container mt-5">
-    <div class="card mx-auto" style="max-width: 500px;">
-      <div class="card-body">
-        <h3 class="card-title text-center mb-4">Register Admin</h3>
-        <form method="POST">
-          <div class="mb-3">
-            <label class="form-label">Full Name</label>
-            <input type="text" name="name" class="form-control" required>
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+
+    <!-- Include the bars component -->
+    <?php include_once '../components/bars.php';?>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" style="margin-top: 50px;">
+      <!-- Content Header (Page header) -->
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Create a Parent</h1>
+            </div>
           </div>
-          <div class="mb-3">
-            <label class="form-label">National ID</label>
-            <input type="text" name="national_id" class="form-control" required>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="container-fluid">
+          <div class="col-md-12">
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">Create a Parent</h3>
+              </div>
+
+              <div class="card-body p-0">
+                <div class="bs-stepper linear">
+                  <div class="bs-stepper-content">
+                    <form method="POST">
+                      <div class="form-group">
+                      <label for="Name">Name</label>
+                      <input type="text" class="form-control" id="Name" name="name" placeholder="Enter Name" required />
+                      </div>
+                      <div class="form-group">
+                      <label for="National-ID">National ID</label>
+                      <input type="text" class="form-control" id="National-ID" name="national_id" placeholder="Enter National ID" required />
+                      </div>
+                      <div class="form-group">
+                      <label for="Email">Email</label>
+                      <input type="email" class="form-control" id="Email" name="email" placeholder="Enter Email" required />
+                      </div>
+                      <div class="form-group">
+                      <label for="Phone">Phone</label>
+                      <input type="text" class="form-control" id="Phone" name="phone" placeholder="Enter Phone Number" required />
+                      </div>
+                      <div class="form-group">
+                      <label for="Password">Password</label>
+                      <input type="password" class="form-control" id="Password" name="password" placeholder="Enter Password" required />
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                      <a href="admins.php" style="color: white; text-decoration: none;">
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                      </a>
+
+                      <button type="submit" class="btn btn-primary">
+                        Submit
+                      </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Phone</label>
-            <input type="text" name="phone" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" required>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Register Admin</button>
-        </form>
-      </div>
+        </div>
+      </section>
     </div>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Include the footer component -->
+    <?php include_once '../components/footer.php';?>
   </div>
+  <!-- ./wrapper -->
+
+  <!-- // Include the scripts component -->
+  <?php include_once '../components/scripts.php';?>
+  <!-- // Include the charts data component -->
+  <?php include_once '../components/chartsData.php';?>
 </body>
 </html>
