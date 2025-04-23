@@ -20,7 +20,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Parent Dashboard</h1>
+              <h1>Parent Profile</h1>
             </div>
           </div>
         </div>
@@ -30,16 +30,6 @@
       <!-- Main content -->
                      <section class="content">
                 <div class="container-fluid">
-                  <!-- Buttons -->
-                  <div class="upload-section">
-                    <label id="bg-upload" class="upload-btn"
-                      >Choose cover photo
-                    </label>
-                    <input type="file" id="bg-upload" accept="image/*" hidden />
-                    <label id="remove-bg-btn" class="remove-btn">
-                      Delete cover photo
-                    </label>
-                  </div>
 
                   <!-- Profile Section -->
                   <div class="profile-header" id="profile-header">
