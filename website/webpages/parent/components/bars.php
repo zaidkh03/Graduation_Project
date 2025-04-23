@@ -1,6 +1,6 @@
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
-  <img class="animation__shake" src="../../../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  <img class="animation__shake" src="../../../dist/img/logo.png" alt="AdminLTELogo" height="60" width="60">
 </div>
 
 <!-- Navbar -->
@@ -9,9 +9,6 @@
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-    </li>
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="index3.html" class="nav-link">Home</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
       <a href="#" class="nav-link">Contact</a>
@@ -53,6 +50,12 @@
         <i class="fas fa-expand-arrows-alt"></i>
       </a>
     </li>
+    <li class="nav-item">
+            <a class="nav-link" href="../../login/logout.php">
+              <i>Logout</i>
+              <i class="nav-icon fa fa-sign-out-alt	"></i>
+            </a>
+          </li>
     <!-- <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
@@ -78,7 +81,7 @@
         <img src="../../../dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Admin</a>
+        <a href="../pages/profile.php" class="d-block">Admin</a>
       </div>
     </div>
 
@@ -98,50 +101,20 @@
         </li>
 
         <li class="nav-item">
-          <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
+          <a href="../pages/grades.php" class="nav-link">
+            <i class="nav-icon fas fa-clipboard-check	"></i>
             <p>
-              Perants
+            Grades
               <span class="badge badge-secondary right">2</span>
             </p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
+          <a href="../pages/attendance.php" class="nav-link">
+            <i class="nav-icon fas fa-user-times"></i>
             <p>
-              Students
-              <span class="badge badge-secondary right">2</span>
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon fas fa-book"></i>
-            <p>
-              Subjects
-              <span class="badge badge-secondary right">2</span>
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon fas fa-chalkboard-teacher"></i>
-            <p>
-              Teachers
-              <span class="badge badge-secondary right">2</span>
-            </p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
-            <i class="nav-icon fas fa-school"></i>
-            <p>
-              Classes
+            Attendance
               <span class="badge badge-secondary right">2</span>
             </p>
           </a>

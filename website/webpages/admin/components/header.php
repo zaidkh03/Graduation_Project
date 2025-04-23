@@ -31,6 +31,8 @@
   <link rel="stylesheet" href="../../../plugins/dropzone/min/dropzone.min.css" />
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../dist/css/adminlte.min.css" />
+  <!--style for profile-->
+  <link rel="stylesheet" href="../../../dist/css/profile.css">
 
 
 

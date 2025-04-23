@@ -32,3 +32,27 @@
 <script src="../../../dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../../../dist/js/pages/dashboard.js"></script>
+<!-- Custom script for profile page -->
+<script>
+  const uploadInput = document.getElementById('bg-upload');
+  const coverPhoto = document.getElementById('cover-photo');
+  const removeBtn = document.getElementById('remove-bg-btn');
+
+  uploadInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        coverPhoto.src = e.target.result;
+        coverPhoto.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  removeBtn.addEventListener('click', function () {
+    coverPhoto.src = '';
+    coverPhoto.style.display = 'none';
+    uploadInput.value = ''; // reset input
+  });
+</script>
