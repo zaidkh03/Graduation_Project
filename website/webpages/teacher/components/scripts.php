@@ -32,3 +32,30 @@
 <script src="../../../dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../../../dist/js/pages/dashboard.js"></script>
+<!-- Ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<!-- Select2 -->
+<script src="../../../plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="../../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- dropzonejs -->
+<script src="../../../plugins/dropzone/min/dropzone.min.js"></script>
+<!-- InputMask -->
+<script src="../../../plugins/moment/moment.min.js"></script>
+<script src="../../../plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="../../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="../../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- Search Filter Script -->
+<script>
+      $("#classSearchInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#example1 tbody tr").filter(function () {
+          var Name = $(this).find("td:nth-child(2)").text().toLowerCase();
+          $(this).toggle(Name.indexOf(value) > -1);
+        });
+      });
+</script>
