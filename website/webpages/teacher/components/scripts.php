@@ -51,6 +51,7 @@
 <script src="../../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <!-- Search Filter Script -->
 <script>
+      //filter the table based on the selected class
       $("#classSearchInput").on("keyup", function () {
         var value = $(this).val().toLowerCase();
         $("#example1 tbody tr").filter(function () {
@@ -58,4 +59,12 @@
           $(this).toggle(Name.indexOf(value) > -1);
         });
       });
+
+      // Select all checkboxes when the "Select All" checkbox is checked/unchecked
+    document.getElementById('selectAll').addEventListener('change', function() {
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+      });
+    });
 </script>

@@ -33,10 +33,5 @@
   <link rel="stylesheet" href="../../../dist/css/adminlte.min.css" />
   <!--style for profile-->
   <link rel="stylesheet" href="../../../dist/css/profile.css">
-
-
-
-
-
-
-
+  <!--style for contact-->
+  <link rel="stylesheet" href="../../../dist/css/contact.css">

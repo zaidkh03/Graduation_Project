@@ -1,6 +1,6 @@
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="../../../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="../../../dist/img/logo.png" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -11,10 +11,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="../pages/contact.php" class="nav-link">Contact</a>
       </li>
     </ul>
 
@@ -95,7 +92,7 @@
                with font-awesome or any other icon font library -->
           
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="../pages/dashboard.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -104,50 +101,30 @@
           </li>
           
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+            <a href="../pages/grades.php" class="nav-link">
+            <i class="nav-icon fas fa-clipboard-check	"></i>
               <p>
-                Perants
+                Grades
                 <span class="badge badge-secondary right">2</span>
               </p>
             </a>
           </li>
           
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+            <a href="../pages/notifications.php" class="nav-link">
+              <i class="nav-icon fas fa-bell"></i>
               <p>
-                Students
+                Notifications
                 <span class="badge badge-secondary right">2</span>
               </p>
             </a>
           </li>
           
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+            <a href="../pages/attendance.php" class="nav-link">
+            <i class="nav-icon fas fa-user-times"></i>
               <p>
-                Subjects
-                <span class="badge badge-secondary right">2</span>
-              </p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon fas fa-chalkboard-teacher"></i>
-              <p>
-                Teachers
-                <span class="badge badge-secondary right">2</span>
-              </p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon fas fa-school"></i>
-              <p>
-                Classes
+                Attendance
                 <span class="badge badge-secondary right">2</span>
               </p>
             </a>
