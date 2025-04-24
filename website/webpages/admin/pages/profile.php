@@ -16,21 +16,20 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="margin-top: 50px;">
       <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Parent Profile</h1>
-            </div>
-          </div>
-        </div>
-        <!-- /.container-fluid -->
-      </section>
 
       <!-- Main content -->
-                     <section class="content">
+      <div class="content-header">
                 <div class="container-fluid">
+                  <div class="row mb-2">
+                    <div class="col-sm-6">
+                      <h2 class="m-0">👤 Profile</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
+              <section class="content">
+                <div class="container-fluid">
                   <!-- Profile Section -->
                   <div class="profile-header" id="profile-header">
                     <div class="avatar">SN</div>
@@ -68,6 +67,8 @@
                   </div>
                 </div>
               </section>
+      
+
     </div>
     <!-- /.content-wrapper -->
 
