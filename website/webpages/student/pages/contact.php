@@ -35,11 +35,11 @@
                 <div class="contact-cards w-100">
                   <div class="card1">
                   <i class="fas fa-user-shield fa-4x"></i>
+
                     <h3>Admin</h3>
                     <table>
                       <tr>
-                        <td><i class="fas fa-phone"></i>
-                        </td>
+                        <td><i class="fas fa-phone"></i></td>
                         <td><a href="tel:0799999999">0799999999</a></td>
                       </tr>
                       <tr>
@@ -56,23 +56,22 @@
               <div class="col-lg-6 d-flex">
                 <div class="contact-cards w-100">
                   <div class="card1">
-                  <i class="fas fa-school fa-4x"></i>
+                  <i class="fas fa-school fa-4x"></i> <!-- 3x bigger -->
+
                     <h3>School</h3>
                     <table>
                       <tr>
-                        <td><i class="fas fa-phone"></i>
-                        </td>
+                        <td><i class="fas fa-phone"></i></td>
                         <td><a href="tel:0799999999">0799999999</a></td>
                       </tr>
                       <tr>
-                        <td><i class="fas fa-envelope"></i>                        </td>
+                        <td><i class="fas fa-envelope"></i></td>
                         <td>
                           <a href="mailto:Email@domain.com">Email@domain.com</a>
                         </td>
                       </tr>
                       <tr>
-                        <td><i class="fas fa-link"></i>
-                        </td>
+                        <td><i class="fas fa-link"></i></td>
                         <td>
                           <a href="https://www.madrasati.com"
                             >www.madrasati.com</a
@@ -80,10 +79,31 @@
                         </td>
                       </tr>
                       <tr>
-                        <td><i class="fas fa-map-marker-alt"></i>
-                        </td>
+                        <td><i class="fas fa-map-marker-alt"></i></td>
                         <td>
                           <a href="#">School Location click to see direction</a>
+                        </td>
+                        </tr>
+                        
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 d-flex">
+                <div class="contact-cards w-100">
+                  <div class="card1">
+                  <i class="fas fa-chalkboard-teacher fa-4x"></i> <!-- 3x bigger -->
+
+                    <h3>Mentor teacher</h3>
+                    <table>
+                      <tr>
+                        <td><i class="fas fa-phone"></i></td>
+                        <td><a href="tel:0799999999">0799999999</a></td>
+                      </tr>
+                      <tr>
+                        <td><i class="fas fa-envelope"></i></td>
+                        <td>
+                          <a href="mailto:Email@domain.com">Email@domain.com</a>
                         </td>
                       </tr>
                     </table>

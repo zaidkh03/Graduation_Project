@@ -20,7 +20,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Parent Profile</h1>
+              <h1><i class="fas fa-user-circle"></i> Profile</h1>
             </div>
           </div>
         </div>
@@ -35,34 +35,26 @@
                   <div class="profile-header" id="profile-header">
                     <div class="avatar">SN</div>
                     <div class="profile-info">
-                      <strong>Student Name</strong><br />
-                      <small>student</small>
+                      <strong>Teacher Name</strong><br />
+                      <small>Teacher</small>
                     </div>
                   </div>
 
                   <div class="info-grid">
                     <div class="info-card">
-                      <h3>🆔 National ID</h3>
+                      <h3><i class="fas fa-address-card"></i> National ID</h3>
                       <p>value</p>
                     </div>
                     <div class="info-card">
-                      <h3>🎂 Date of Birth</h3>
+                      <h3><i class="fas fa-phone"></i> Phone Number</h3>
                       <p>value</p>
                     </div>
                     <div class="info-card">
-                      <h3>⚧ Gender</h3>
+                      <h3><i class="fas fa-envelope"></i> Email</h3>
                       <p>value</p>
                     </div>
                     <div class="info-card">
-                      <h3>🏠 Address</h3>
-                      <p>value</p>
-                    </div>
-                    <div class="info-card">
-                      <h3>🏫 Current Grade</h3>
-                      <p>value</p>
-                    </div>
-                    <div class="info-card">
-                      <h3>👨‍👩‍👧 Parent Name</h3>
+                      <h3><i class="fas fa-user-graduate"></i> Number of Students</h3>
                       <p>value</p>
                     </div>
                   </div>

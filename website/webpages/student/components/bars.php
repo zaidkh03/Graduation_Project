@@ -11,10 +11,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="../pages/contact.php" class="nav-link">Contact</a>
       </li>
     </ul>
 
@@ -71,7 +68,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="../pages/dashboard.php" class="brand-link">
       <img src="../../../dist/img/logo2.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Madrasati</span>
     </a>
@@ -84,7 +81,7 @@
           <img src="../../../dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a href="../pages/profile.php" class="d-block">Admin</a>
         </div>
       </div>
 
@@ -104,28 +101,18 @@
           </li>
           
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="../pages/grades.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Perants
+                Grades
                 <span class="badge badge-secondary right">2</span>
               </p>
             </a>
           </li>
           
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
+            <a href="../subjects.php" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
-              <p>
-                Students
-                <span class="badge badge-secondary right">2</span>
-              </p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
               <p>
                 Subjects
                 <span class="badge badge-secondary right">2</span>
@@ -134,20 +121,10 @@
           </li>
           
           <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon fas fa-chalkboard-teacher"></i>
+            <a href="../pages/attendance.php" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
               <p>
-                Teachers
-                <span class="badge badge-secondary right">2</span>
-              </p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon fas fa-school"></i>
-              <p>
-                Classes
+                Attendance
                 <span class="badge badge-secondary right">2</span>
               </p>
             </a>

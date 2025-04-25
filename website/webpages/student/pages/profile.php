@@ -23,20 +23,19 @@
               <h1><i class="fas fa-user-circle"></i> Profile</h1>
             </div>
           </div>
-        </div>
-        <!-- /.container-fluid -->
+        </div><!-- /.container-fluid -->
       </section>
 
       <!-- Main content -->
-                     <section class="content">
+      <section class="content">
                 <div class="container-fluid">
 
                   <!-- Profile Section -->
                   <div class="profile-header" id="profile-header">
-                    <div class="avatar">PN</div>
+                    <div class="avatar">SN</div>
                     <div class="profile-info">
-                      <strong>Parent Name</strong><br />
-                      <small>Parent</small>
+                      <strong>Student Name</strong><br />
+                      <small>Student</small>
                     </div>
                   </div>
 
@@ -46,23 +45,23 @@
                       <p>value</p>
                     </div>
                     <div class="info-card">
-                      <h3><i class="fas fa-phone"></i> Phone Number</h3>
+                      <h3><i class="fas fa-birthday-cake"></i> Date of Birth</h3>
                       <p>value</p>
                     </div>
                     <div class="info-card">
-                      <h3><i class="fas fa-envelope"></i> Email</h3>
+                      <h3><i class="fas fa-venus-mars"></i> Gender</h3>
                       <p>value</p>
                     </div>
                     <div class="info-card">
-                      <h3><i class="fas fa-chalkboard-teacher"></i> Subject</h3>
+                      <h3><i class="fas fa-location-arrow"></i> Address</h3>
                       <p>value</p>
                     </div>
                     <div class="info-card">
-                      <h3><i class="fas fa-table"></i> Number of Classes</h3>
+                      <h3><i class="fas fa-graduation-cap"></i> Current Grade</h3>
                       <p>value</p>
                     </div>
                     <div class="info-card">
-                      <h3><i class="fas fa-user-tie"></i> Mentored Class</h3>
+                      <h3><i class="fas fa-user-friends"></i> Parent Name</h3>
                       <p>value</p>
                     </div>
                   </div>
