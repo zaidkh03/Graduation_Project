@@ -20,7 +20,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Parent Dashboard</h1>
+              <h1>Attendance</h1>
             </div>
           </div>
         </div><!-- /.container-fluid -->
@@ -49,39 +49,75 @@
                         </select>
                       </div>
                     </div>
-                    <!--select bar-->
                     <!--Table -->
                     <table
                       id="example1"
                       class="table table-bordered table-striped"
                     >
                       <thead style="background-color: #343a40; color: white">
-                        <tr>
-                          <th>Attendance Number</th>
-                          <th>Date</th>
-                          <th>Agreement</th>
-                          <th>Excuse</th>
-                        </tr>
+                      <tr>
+                      <th>Attendance Number</th>
+                      <th>Date</th>
+                      <th>Agreement</th>
+                      <th>Excuse</th>
+                      <th>Action</th>
+                      </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>tenth grade</td>
-                          <td>A</td>
-                          <td>25</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>ggg</td>
-                          <td>B</td>
-                          <td>25</td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td>nin</td>
-                          <td>B</td>
-                          <td>25</td>
-                        </tr>
+                      <tr>
+                      <td>1</td>
+                      <td>2023-10-01</td>
+                      <td>
+                      <input type="radio" name="agreement1" value="agree"> Agree
+                      <input type="radio" name="agreement1" value="disagree"> Disagree
+                      </td>
+                      <td>
+                      <select name="excuse1" class="form-control form-control-sm">
+                        <option value="sick">Sick</option>
+                        <option value="personal">Personal/Family Related</option>
+                        <option value="none">None</option>
+                      </select>
+                      </td>
+                      <td>
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td>2</td>
+                      <td>2023-10-02</td>
+                      <td>
+                      <input type="radio" name="agreement2" value="agree"> Agree
+                      <input type="radio" name="agreement2" value="disagree"> Disagree
+                      </td>
+                      <td>
+                      <select name="excuse2" class="form-control form-control-sm">
+                        <option value="sick">Sick</option>
+                        <option value="personal">Personal/Family Related</option>
+                        <option value="none">None</option>
+                      </select>
+                      </td>
+                      <td>
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td>3</td>
+                      <td>2023-10-03</td>
+                      <td>
+                      <input type="radio" name="agreement3" value="agree"> Agree
+                      <input type="radio" name="agreement3" value="disagree"> Disagree
+                      </td>
+                      <td>
+                      <select name="excuse3" class="form-control form-control-sm">
+                        <option value="sick">Sick</option>
+                        <option value="personal">Personal/Family Related</option>
+                        <option value="none">None</option>
+                      </select>
+                      </td>
+                      <td>
+                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                      </td>
+                      </tr>
                       </tbody>
                     </table>
                   </div>

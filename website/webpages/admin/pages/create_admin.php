@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Create a Parent</h1>
+              <h1>Create Admin</h1>
             </div>
           </div>
         </div><!-- /.container-fluid -->
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           <div class="col-md-12">
             <div class="card card-default">
               <div class="card-header">
-                <h3 class="card-title">Create a Parent</h3>
+                <h3 class="card-title">Create a Admin</h3>
               </div>
 
               <div class="card-body p-0">

@@ -93,12 +93,14 @@
                                                 <td>B</td>
                                                 <td>2</td>
                                                 <td style="text-align: center">
-                                                    <ion-icon
-                                                        name="create-outline"
-                                                        style="cursor: pointer; margin-right: 10px"></ion-icon>
-                                                    <ion-icon
-                                                        name="trash-outline"
-                                                        style="cursor: pointer; font-size: 25"></ion-icon>
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-sm btn-primary mr-1">
+                                                        <ion-icon name="create-outline"></ion-icon>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                        <ion-icon name="trash-outline"></ion-icon>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -106,31 +108,14 @@
                                                 <td>nin</td>
                                                 <td>B</td>
                                                 <td>10</td>
-                                                <td style="text-align: center; width: 150px">
+                                                <td style="text-align: center">
                                                     <button
                                                         type="button"
-                                                        style="
-                                background-color: #343a40;
-                                border: none;
-                                padding: 6px 10px;
-                                border-radius: 4px;
-                                margin-right: 8px;
-                              ">
-                                                        <ion-icon
-                                                            name="create-outline"
-                                                            style="color: white; font-size: 22px"></ion-icon>
+                                                        class="btn btn-sm btn-primary mr-1">
+                                                        <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button
-                                                        type="button"
-                                                        style="
-                                background-color: #343a40;
-                                border: none;
-                                padding: 6px 10px;
-                                border-radius: 4px;
-                              ">
-                                                        <ion-icon
-                                                            name="trash-outline"
-                                                            style="color: white; font-size: 22px"></ion-icon>
+                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                        <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -141,19 +126,6 @@
                         </div>
                     </div>
                 </div>
-            </section><!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Admin Dashboard</h1>
-                        </div>
-                    </div>
-                </div><!-- /.container-fluid -->
-            </section>
-
-            <!-- Main content -->
-
         </div>
         <!-- /.content-wrapper -->
 

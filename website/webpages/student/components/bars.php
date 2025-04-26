@@ -92,7 +92,7 @@
                with font-awesome or any other icon font library -->
           
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="../pages/dashboard.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -111,7 +111,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="../subjects.php" class="nav-link">
+            <a href="../pages/subjects.php" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Subjects

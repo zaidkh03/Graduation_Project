@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard</title>
-  <!-- Include the header component -->
-  <?php include_once '../components/header.php';?>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <!-- Include the header component -->
+    <?php include_once '../components/header.php'; ?>
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
+    <div class="wrapper">
 
-    <!-- Include the bars component -->
-    <?php include_once '../components/bars.php';?>
+        <!-- Include the bars component -->
+        <?php include_once '../components/bars.php'; ?>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="margin-top: 50px;">
-        <!-- Main content -->
-        <!-- Content Header (Page header) -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" style="margin-top: 50px;">
+            <!-- Main content -->
+            <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -92,44 +94,29 @@
                                                 <td>B</td>
                                                 <td>25</td>
                                                 <td style="text-align: center">
-                                                    <ion-icon
-                                                        name="create-outline"
-                                                        style="cursor: pointer; margin-right: 10px"></ion-icon>
-                                                    <ion-icon
-                                                        name="trash-outline"
-                                                        style="cursor: pointer; font-size: 25"></ion-icon>
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-sm btn-primary mr-1">
+                                                        <ion-icon name="create-outline"></ion-icon>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                        <ion-icon name="trash-outline"></ion-icon>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td></td>
+                                                <td>3</td>
                                                 <td>nin</td>
                                                 <td>B</td>
                                                 <td>25</td>
-                                                <td style="text-align: center; width: 150px">
+                                                <td style="text-align: center">
                                                     <button
                                                         type="button"
-                                                        style="
-                                background-color: #343a40;
-                                border: none;
-                                padding: 6px 10px;
-                                border-radius: 4px;
-                                margin-right: 8px;
-                              ">
-                                                        <ion-icon
-                                                            name="create-outline"
-                                                            style="color: white; font-size: 22px"></ion-icon>
+                                                        class="btn btn-sm btn-primary mr-1">
+                                                        <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button
-                                                        type="button"
-                                                        style="
-                                background-color: #343a40;
-                                border: none;
-                                padding: 6px 10px;
-                                border-radius: 4px;
-                              ">
-                                                        <ion-icon
-                                                            name="trash-outline"
-                                                            style="color: white; font-size: 22px"></ion-icon>
+                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                        <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -141,18 +128,19 @@
                     </div>
                 </div>
             </section>
-      
+
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Include the footer component -->
+        <?php include_once '../components/footer.php'; ?>
     </div>
-    <!-- /.content-wrapper -->
+    <!-- ./wrapper -->
 
-    <!-- Include the footer component -->
-    <?php include_once '../components/footer.php';?>
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- // Include the scripts component -->
-  <?php include_once '../components/scripts.php';?>
-  <!-- // Include the charts data component -->
-  <?php include_once '../components/chartsData.php';?>
+    <!-- // Include the scripts component -->
+    <?php include_once '../components/scripts.php'; ?>
+    <!-- // Include the charts data component -->
+    <?php include_once '../components/chartsData.php'; ?>
 </body>
+
 </html>

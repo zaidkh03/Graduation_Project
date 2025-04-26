@@ -35,3 +35,5 @@
   <link rel="stylesheet" href="../../../dist/css/profile.css">
   <!--style for contact-->
   <link rel="stylesheet" href="../../../dist/css/contact.css">
+  <!--style for subject-->
+  <link rel="stylesheet" href="../../../dist/css/subjects.css">
