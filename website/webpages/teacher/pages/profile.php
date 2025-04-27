@@ -35,8 +35,8 @@
                   <div class="profile-header" id="profile-header">
                     <div class="avatar">PN</div>
                     <div class="profile-info">
-                      <strong>Parent Name</strong><br />
-                      <small>Parent</small>
+                      <strong>Teacher Name</strong><br />
+                      <small>Teacher</small>
                     </div>
                   </div>
 

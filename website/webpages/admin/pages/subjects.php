@@ -63,42 +63,42 @@
                                             <tr style="text-align:center;">
                                                 <th style="width: 50px;">ID</th>
                                                 <th>Subject Name</th>
-                                                <th>Changes</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>tenth grade</td>
-                                                <td style="text-align: center ">
-                                                    <button type="button" class="btn btn-sm btn-primary mr-1">
+                                                <td>Mathematics</td>
+                                                <td style="text-align: center;">
+                                                    <button type="button" class="btn btn-sm btn-primary mr-1" title="Edit">
                                                         <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                    <button type="button" class="btn btn-sm btn-danger" title="Delete">
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>ggg</td>
-                                                <td style="text-align: center">
-                                                    <button type="button" class="btn btn-sm btn-primary mr-1">
+                                                <td>Science</td>
+                                                <td style="text-align: center;">
+                                                    <button type="button" class="btn btn-sm btn-primary mr-1" title="Edit">
                                                         <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                    <button type="button" class="btn btn-sm btn-danger" title="Delete">
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td>nin</td>
-                                                <td style="text-align: center; width: 150px">
-                                                <button type="button" class="btn btn-sm btn-primary mr-1">
+                                                <td>3</td>
+                                                <td>History</td>
+                                                <td style="text-align: center;">
+                                                    <button type="button" class="btn btn-sm btn-primary mr-1" title="Edit">
                                                         <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                    <button type="button" class="btn btn-sm btn-danger" title="Delete">
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>

@@ -49,12 +49,7 @@
                                         <div id="example1_filter" class="dataTables_filter">
                                             <label>
                                                 Search:
-                                                <input
-                                                    type="search"
-                                                    id="classSearchInput"
-                                                    class="form-control form-control-sm"
-                                                    placeholder="Search for Students..."
-                                                    aria-controls="example1" />
+                                                <input type="search" id="classSearchInput" class="form-control form-control-sm" placeholder="Search for Students..." aria-controls="example1" />
                                             </label>
                                         </div>
                                     </div>
@@ -63,19 +58,19 @@
                                         class="table table-bordered table-striped">
                                         <thead style="background-color: #343a40; color: white">
                                             <tr>
-                                                <th>ID</th>
-                                                <th>NAME</th>
-                                                <th>CLASS ID</th>
-                                                <th>GRADE</th>
-                                                <th>Changes</th>
+                                                <th>Student ID</th>
+                                                <th>Student Name</th>
+                                                <th>Class</th>
+                                                <th>Parent ID</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>tenth grade</td>
-                                                <td>A</td>
-                                                <td>5</td>
+                                                <td>John Doe</td>
+                                                <td>10-A</td>
+                                                <td>19646846513</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
@@ -89,9 +84,9 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>ggg</td>
-                                                <td>B</td>
-                                                <td>2</td>
+                                                <td>Jane Smith</td>
+                                                <td>9-B</td>
+                                                <td>191684684f6</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
@@ -104,10 +99,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td>nin</td>
-                                                <td>B</td>
-                                                <td>10</td>
+                                                <td>3</td>
+                                                <td>Michael Brown</td>
+                                                <td>8-C</td>
+                                                <td>20654984984</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"

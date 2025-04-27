@@ -41,8 +41,8 @@
                     <table id="example1" class="table table-bordered table-striped">
                       <thead style="background-color: #343a40; color: white">
                       <tr>
-                      <th>Attendance Number</th>
-                      <th>Date</th>
+                      <th style="width: 50%">Attendance Number</th>
+                      <th style="width: 50%">Date</th>
                         </tr>
                         </thead>
                         <tbody>

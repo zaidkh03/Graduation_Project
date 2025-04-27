@@ -35,9 +35,9 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+              <h3>15</h3>
 
-              <p>New Orders</p>
+              <p>Student Rank in Class</p>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
             <div class="inner">
               <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-              <p>Bounce Rate</p>
+              <p>Student Rank in garde</p>
             </div>
           </div>
         </div>
@@ -57,9 +57,9 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3>4/10</h3>
 
-              <p>User Registrations</p>
+              <p>Absence</p>
             </div>
           </div>
         </div>
@@ -68,9 +68,9 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3>10-b</h3>
 
-              <p>Unique Visitors</p>
+              <p>Class name</p>
             </div>
           </div>
         </div>

@@ -58,69 +58,69 @@
                       </label>
                     </div>
                   </div>
-                  <table
+                    <table
                     id="example1"
                     class="table table-bordered table-striped">
                     <thead style="background-color: #343a40; color: white">
                       <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Subject</th>
-                        <th>Phone number</th>
-                        <th>Changes</th>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Subject</th>
+                      <th>Phone Number</th>
+                      <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>1</td>
-                        <td>tenth grade</td>
-                        <td>A</td>
-                        <td>25</td>
-                        <td style="text-align: center">
-                          <button
-                            type="button"
-                            class="btn btn-sm btn-primary mr-1">
-                            <ion-icon name="create-outline"></ion-icon>
-                          </button>
-                          <button type="button" class="btn btn-sm btn-danger">
-                            <ion-icon name="trash-outline"></ion-icon>
-                          </button>
-                        </td>
+                      <td>1</td>
+                      <td>John Doe</td>
+                      <td>Mathematics</td>
+                      <td>123-456-7890</td>
+                      <td style="text-align: center">
+                      <button
+                      type="button"
+                      class="btn btn-sm btn-primary mr-1">
+                      <ion-icon name="create-outline"></ion-icon>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-danger">
+                      <ion-icon name="trash-outline"></ion-icon>
+                      </button>
+                      </td>
                       </tr>
                       <tr>
-                        <td>2</td>
-                        <td>ggg</td>
-                        <td>B</td>
-                        <td>25</td>
-                        <td style="text-align: center">
-                          <button
-                            type="button"
-                            class="btn btn-sm btn-primary mr-1">
-                            <ion-icon name="create-outline"></ion-icon>
-                          </button>
-                          <button type="button" class="btn btn-sm btn-danger">
-                            <ion-icon name="trash-outline"></ion-icon>
-                          </button>
-                        </td>
+                      <td>2</td>
+                      <td>Jane Smith</td>
+                      <td>Science</td>
+                      <td>987-654-3210</td>
+                      <td style="text-align: center">
+                      <button
+                      type="button"
+                      class="btn btn-sm btn-primary mr-1">
+                      <ion-icon name="create-outline"></ion-icon>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-danger">
+                      <ion-icon name="trash-outline"></ion-icon>
+                      </button>
+                      </td>
                       </tr>
                       <tr>
-                        <td></td>
-                        <td>nin</td>
-                        <td>B</td>
-                        <td>25</td>
-                        <td style="text-align: center">
-                          <button
-                            type="button"
-                            class="btn btn-sm btn-primary mr-1">
-                            <ion-icon name="create-outline"></ion-icon>
-                          </button>
-                          <button type="button" class="btn btn-sm btn-danger">
-                            <ion-icon name="trash-outline"></ion-icon>
-                          </button>
-                        </td>
+                      <td>3</td>
+                      <td>Emily Johnson</td>
+                      <td>English</td>
+                      <td>555-123-4567</td>
+                      <td style="text-align: center">
+                      <button
+                      type="button"
+                      class="btn btn-sm btn-primary mr-1">
+                      <ion-icon name="create-outline"></ion-icon>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-danger">
+                      <ion-icon name="trash-outline"></ion-icon>
+                      </button>
+                      </td>
                       </tr>
                     </tbody>
-                  </table>
+                    </table>
                 </div>
               </div>
             </div>

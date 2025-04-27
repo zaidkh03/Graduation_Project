@@ -64,49 +64,53 @@
                                         <thead style="background-color: #343a40; color: white">
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Class</th>
+                                                <th>Class Name</th>
                                                 <th>Section</th>
                                                 <th>Capacity</th>
-                                                <th>Changes</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>tenth grade</td>
+                                                <td>10th Grade</td>
                                                 <td>A</td>
-                                                <td>25</td>
+                                                <td>30</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
                                                         class="btn btn-sm btn-primary mr-1">
                                                         <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-sm btn-danger">
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>ggg</td>
+                                                <td>9th Grade</td>
                                                 <td>B</td>
-                                                <td>25</td>
+                                                <td>28</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
                                                         class="btn btn-sm btn-primary mr-1">
                                                         <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-sm btn-danger">
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td>nin</td>
-                                                <td>B</td>
+                                                <td>3</td>
+                                                <td>8th Grade</td>
+                                                <td>C</td>
                                                 <td>25</td>
                                                 <td style="text-align: center">
                                                     <button
@@ -114,7 +118,9 @@
                                                         class="btn btn-sm btn-primary mr-1">
                                                         <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-sm btn-danger">
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>

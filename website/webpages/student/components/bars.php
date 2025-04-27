@@ -73,17 +73,22 @@
       <span class="brand-text font-weight-light">Madrasati</span>
     </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="../../../dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="../pages/profile.php" class="d-block">Admin</a>
-        </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 ml-2 pl-1 mr-2 d-flex align-items-center" style="height: 50px;">
+      <div style="width: 33px; height: 33px; font-size: 18px;  text-align: center; background: white; color: black; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <?php
+        $fullName = "John Doe";
+        $nameParts = explode(' ', $fullName);
+        $initials = strtoupper(substr($nameParts[0], 0, 1) . substr(end($nameParts), 0, 1));
+        echo $initials;
+        ?>
       </div>
+      <div class="info flex-grow-1 text-truncate">
+        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php echo htmlspecialchars($fullName); ?></a>
+      </div>
+    </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">

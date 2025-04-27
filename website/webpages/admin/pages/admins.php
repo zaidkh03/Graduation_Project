@@ -35,7 +35,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -67,55 +66,67 @@
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Phone number</th>
-                                                <th>Changes</th>
+                                                <th>Phone Number</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>tenth grade</td>
-                                                <td>A</td>
-                                                <td>25</td>
+                                                <td>John Doe</td>
+                                                <td>john.doe@example.com</td>
+                                                <td>+1234567890</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
-                                                        class="btn btn-sm btn-primary mr-1">
+                                                        class="btn btn-sm btn-primary mr-1"
+                                                        title="Edit">
                                                         <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-sm btn-danger"
+                                                        title="Delete">
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>ggg</td>
-                                                <td>B</td>
-                                                <td>25</td>
+                                                <td>Jane Smith</td>
+                                                <td>jane.smith@example.com</td>
+                                                <td>+9876543210</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
-                                                        class="btn btn-sm btn-primary mr-1">
+                                                        class="btn btn-sm btn-primary mr-1"
+                                                        title="Edit">
                                                         <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-sm btn-danger"
+                                                        title="Delete">
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
-                                                <td>nin</td>
-                                                <td>B</td>
-                                                <td>25</td>
+                                                <td>Emily Johnson</td>
+                                                <td>emily.johnson@example.com</td>
+                                                <td>+1122334455</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
-                                                        class="btn btn-sm btn-primary mr-1">
+                                                        class="btn btn-sm btn-primary mr-1"
+                                                        title="Edit">
                                                         <ion-icon name="create-outline"></ion-icon>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-sm btn-danger"
+                                                        title="Delete">
                                                         <ion-icon name="trash-outline"></ion-icon>
                                                     </button>
                                                 </td>

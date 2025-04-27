@@ -70,16 +70,16 @@
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Phone number</th>
-                                                <th>Changes</th>
+                                                <th>Phone Number</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>tenth grade</td>
-                                                <td>A</td>
-                                                <td>25</td>
+                                                <td>John Doe</td>
+                                                <td>john.doe@example.com</td>
+                                                <td>+1234567890</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
@@ -93,9 +93,9 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>ggg</td>
-                                                <td>B</td>
-                                                <td>25</td>
+                                                <td>Jane Smith</td>
+                                                <td>jane.smith@example.com</td>
+                                                <td>+9876543210</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
@@ -108,10 +108,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td>nin</td>
-                                                <td>B</td>
-                                                <td>25</td>
+                                                <td>3</td>
+                                                <td>Michael Brown</td>
+                                                <td>michael.brown@example.com</td>
+                                                <td>+1122334455</td>
                                                 <td style="text-align: center">
                                                     <button
                                                         type="button"
