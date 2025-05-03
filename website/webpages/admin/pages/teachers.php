@@ -1,3 +1,17 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Include database connection
+include '../../db_connection.php'; // adjust path if needed
+
+// Fetch teachers + subjects
+$sql = "SELECT teacher.id, teacher.name, teacher.phone, subjects.name AS subject_name
+        FROM teachers AS teacher
+        LEFT JOIN subjects ON teacher.subject_id = subjects.id";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,19 +19,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
-  <!-- Include the header component -->
   <?php include_once '../components/header.php'; ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    <!-- Include the bars component -->
     <?php include_once '../components/bars.php'; ?>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="margin-top: 50px;">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -27,15 +37,16 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item active">
-                  <a href="create_teacher.php"><button class="btn btn-primary" type="button">Create Teacher</button></a>
+                  <a href="../create/create_teacher.php">
+                    <button class="btn btn-primary" type="button">Create Teacher</button>
+                  </a>
                 </li>
               </ol>
             </div>
           </div>
-        </div><!-- /.container-fluid -->
+        </div>
       </section>
 
-      <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -58,69 +69,41 @@
                       </label>
                     </div>
                   </div>
-                    <table
-                    id="example1"
-                    class="table table-bordered table-striped">
+                  <table id="example1" class="table table-bordered table-striped">
                     <thead style="background-color: #343a40; color: white">
                       <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Subject</th>
-                      <th>Phone Number</th>
-                      <th>Actions</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Subject</th>
+                        <th>Phone Number</th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                      <td>1</td>
-                      <td>John Doe</td>
-                      <td>Mathematics</td>
-                      <td>123-456-7890</td>
-                      <td style="text-align: center">
-                      <button
-                      type="button"
-                      class="btn btn-sm btn-primary mr-1">
-                      <ion-icon name="create-outline"></ion-icon>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-danger">
-                      <ion-icon name="trash-outline"></ion-icon>
-                      </button>
-                      </td>
-                      </tr>
-                      <tr>
-                      <td>2</td>
-                      <td>Jane Smith</td>
-                      <td>Science</td>
-                      <td>987-654-3210</td>
-                      <td style="text-align: center">
-                      <button
-                      type="button"
-                      class="btn btn-sm btn-primary mr-1">
-                      <ion-icon name="create-outline"></ion-icon>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-danger">
-                      <ion-icon name="trash-outline"></ion-icon>
-                      </button>
-                      </td>
-                      </tr>
-                      <tr>
-                      <td>3</td>
-                      <td>Emily Johnson</td>
-                      <td>English</td>
-                      <td>555-123-4567</td>
-                      <td style="text-align: center">
-                      <button
-                      type="button"
-                      class="btn btn-sm btn-primary mr-1">
-                      <ion-icon name="create-outline"></ion-icon>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-danger">
-                      <ion-icon name="trash-outline"></ion-icon>
-                      </button>
-                      </td>
-                      </tr>
+                      <?php if ($result && $result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                          <tr style="text-align: center;">
+                            <td><?= $row['id'] ?></td>
+                            <td><?= htmlspecialchars($row['name']) ?></td>
+                            <td><?= htmlspecialchars($row['subject_name']) ?></td>
+                            <td><?= htmlspecialchars($row['phone']) ?></td>
+                            <td>
+                              <a href="../edit/edit_teacher.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary mr-1" title="Edit">
+                                <ion-icon name="create-outline"></ion-icon>
+                              </a>
+                              <a href="../delete/delete_teacher.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this teacher?');">
+                                <ion-icon name="trash-outline"></ion-icon>
+                              </a>
+                            </td>
+                          </tr>
+                        <?php endwhile; ?>
+                      <?php else: ?>
+                        <tr>
+                          <td colspan="5" class="text-center">No teachers found.</td>
+                        </tr>
+                      <?php endif; ?>
                     </tbody>
-                    </table>
+                  </table>
                 </div>
               </div>
             </div>
@@ -128,16 +111,11 @@
         </div>
       </section>
     </div>
-    <!-- /.content-wrapper -->
 
-    <!-- Include the footer component -->
     <?php include_once '../components/footer.php'; ?>
   </div>
-  <!-- ./wrapper -->
 
-  <!-- // Include the scripts component -->
   <?php include_once '../components/scripts.php'; ?>
-  <!-- // Include the charts data component -->
   <?php include_once '../components/chartsData.php'; ?>
 </body>
 
