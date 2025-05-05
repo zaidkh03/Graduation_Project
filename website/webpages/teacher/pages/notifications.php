@@ -39,6 +39,15 @@
 
                   <div class="card-body">
                     <div class="row mb-3">
+                      <div class="col text-left">
+
+                                        <div id="example1_filter" class="dataTables_filter">
+                                            <label>
+                                                Search:
+                                                <input type="search" id="classSearchInput" class="form-control form-control-sm" placeholder="Search for Students..." aria-controls="example1" />
+                                            </label>
+                                        </div>
+                                    </div>
                       <div class="col-md-4">
                         <label for="filterClass">Select the Class</label>
                         <select id="filterClass" class="form-control form-control-sm">
@@ -48,24 +57,21 @@
                           <option value="nin">Nin</option>
                         </select>
                       </div>
+                      <div class="col-md-4">
+                        <label for="filterClass">Sent to</label>
+                        <select id="filterClass" class="form-control form-control-sm">
+                          <option value="both">Both</option>
+                          <option value="parents">Parents only</option>
+                          <option value="student">Student only</option>
+                        </select>
+                      </div>
                     </div>
+                    
 
                     <div class="row mb-2">
                       <div class="col text-right">
                         <a href="../pages/text_content.php"><button class="btn btn-primary" id="saveGradesBtn">
-                          Send To Student
-                          <span class="icons">
-                            <ion-icon name="send"></ion-icon>
-                          </span>
-                        </button></a>
-                        <a href="../pages/text_content.php"><button class="btn btn-primary" id="saveGradesBtn">
-                          Send To Parent
-                          <span class="icons">
-                            <ion-icon name="send"></ion-icon>
-                          </span>
-                        </button></a>
-                        <a href="../pages/text_content.php"><button class="btn btn-primary" id="saveGradesBtn">
-                          Send To All
+                          Send Notification
                           <span class="icons">
                             <ion-icon name="send"></ion-icon>
                           </span>

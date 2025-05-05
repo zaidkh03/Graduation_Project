@@ -66,54 +66,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>John Doe</td>
-                                                <td>10-A</td>
-                                                <td>19646846513</td>
-                                                <td style="text-align: center">
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-sm btn-primary mr-1">
-                                                        <ion-icon name="create-outline"></ion-icon>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
-                                                        <ion-icon name="trash-outline"></ion-icon>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Jane Smith</td>
-                                                <td>9-B</td>
-                                                <td>191684684f6</td>
-                                                <td style="text-align: center">
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-sm btn-primary mr-1">
-                                                        <ion-icon name="create-outline"></ion-icon>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
-                                                        <ion-icon name="trash-outline"></ion-icon>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Michael Brown</td>
-                                                <td>8-C</td>
-                                                <td>20654984984</td>
-                                                <td style="text-align: center">
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-sm btn-primary mr-1">
-                                                        <ion-icon name="create-outline"></ion-icon>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
-                                                        <ion-icon name="trash-outline"></ion-icon>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            <?php
+                                            
+                                            include '../../readData.php';
+
+                                            $table = 'students';
+                                            $values = array("id","name","current_grade","parent_id");
+                                            $href = array("admin","../edit pages/edit_student.php","../edit pages/delete.php");
+                                            table_Data($table, $values,$href);
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
