@@ -43,8 +43,9 @@ function table_Data($table,$values,$href){
             <button type='button' class='btn btn-sm btn-danger' title='Delete'>
                 <ion-icon name='trash-outline'></ion-icon>
             </button>
+            </a>
             </td>
-            </a>";
+            ";
             break;
         case ($href[0] == "teacherattendance"):
             echo "<td class='text-center'>
@@ -92,12 +93,28 @@ function select_Data($table,$value,$id_value){
        // Loop through the values array and print each value
        foreach ($id_value as $column) {
             echo "<option value='{$row[$value]}' onclick='view_class()'>{$row[$value]}</option>";
-            echo "<script> consol.log (<option value='{$row[$value]}' onclick='view_class()'>{$row[$value]}</option>) </script>";
-
        }
     echo "</select>";
 
 }
+}
+
+function profile_dash_data($table,$value,$id){
+    // Include the database connection file
+    include 'db_connection.php';
+
+    // Prepare the SQL query to select all data from the specified table
+    $sql ="SELECT * FROM $table WHERE id = $id";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die("Query failed: " . $conn->error);
+    }
+    // print the data in the section you call it once 
+    while ($row = $result->fetch_assoc()) {
+        echo "{$row[$value]}";
+    }
+
 }
 
 ?>

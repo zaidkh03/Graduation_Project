@@ -46,7 +46,13 @@
                     </div>
                     <div class="info-card">
                       <h3><i class="fas fa-birthday-cake"></i> Date of Birth</h3>
-                      <p>value</p>
+                      <p><?php
+                      include '../../readData.php';
+                      $table = "students";
+                      $value = "birth_date";
+                      $id=1;
+                      profile_dash_data($table,$value,$id);
+                      ?></p>
                     </div>
                     <div class="info-card">
                       <h3><i class="fas fa-venus-mars"></i> Gender</h3>
