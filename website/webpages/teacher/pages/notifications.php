@@ -81,29 +81,28 @@
 
                     <table id="example1" class="table table-bordered table-striped">
                       <thead style="background-color: #343a40; color: white">
-                        <tr>
-                          <th class="text-center" style="width: 50px;"><input type="checkbox" id="selectAll" /></th>
-                          <th>Student Name</th>
-                          <th>Parent Name</th>
-                          
-                        </tr>
+                      <tr>
+                        <th class="text-center" style="width: 50px;"><input type="checkbox" id="selectAll" /></th>
+                        <th>Student Name</th>
+                        <th>Parent Name</th>
+                      </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td class="text-center"><input type="checkbox" class="row-checkbox" /></td>
-                          <td contenteditable="true" style="font-size: 12px">A123</td>
-                          <td contenteditable="true" style="font-size: 12px">Ahmed</td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><input type="checkbox" class="row-checkbox" /></td>
-                          <td contenteditable="true" style="font-size: 12px">B456</td>
-                          <td contenteditable="true" style="font-size: 12px">Sara</td>
-                        </tr>
-                        <tr>
-                          <td class="text-center"><input type="checkbox" class="row-checkbox" /></td>
-                          <td contenteditable="true" style="font-size: 12px">C789</td>
-                          <td contenteditable="true" style="font-size: 12px">Omar</td>
-                        </tr>
+                      <tr>
+                        <td class="text-center"><input type="checkbox" class="row-checkbox" /></td>
+                        <td contenteditable="true">John Doe</td>
+                        <td contenteditable="true">Jane Doe</td>
+                      </tr>
+                      <tr>
+                        <td class="text-center"><input type="checkbox" class="row-checkbox" /></td>
+                        <td contenteditable="true">Emily Smith</td>
+                        <td contenteditable="true">Robert Smith</td>
+                      </tr>
+                      <tr>
+                        <td class="text-center"><input type="checkbox" class="row-checkbox" /></td>
+                        <td contenteditable="true">Michael Brown</td>
+                        <td contenteditable="true">Laura Brown</td>
+                      </tr>
                       </tbody>
                     </table>
                   </div>

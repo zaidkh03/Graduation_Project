@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Insert into students table
     $stmt1 = $conn->prepare("INSERT INTO students (name, national_id, birth_date, gender, address, current_grade, status, parent_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt1->bind_param("sssssis", $name, $national_id, $birth_date, $gender, $address, $current_grade, $status, $parent_id);
+    $stmt1->bind_param("sssssiss", $name, $national_id, $birth_date, $gender, $address, $current_grade, $status, $parent_id);
     
     if ($stmt1->execute()) {
         $student_id = $stmt1->insert_id;
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt2->execute();
         $stmt2->close();
 
-        echo "<script>alert('Student registered successfully!'); window.location.href = '../admin/dashboard.php';</script>";
+        echo "<script>alert('Student registered successfully!'); window.location.href = '../pages/students.php';</script>";
     } else {
         echo "Error: " . $stmt1->error;
     }

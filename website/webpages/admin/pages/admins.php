@@ -28,7 +28,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item active">
-                                    <a href="create_admin.php"><button class="btn btn-primary" type="button">Create Admin</button></a>
+                                    <a href="../create/create_admin.php"><button class="btn btn-primary" type="button">Create Admin</button></a>
                                 </li>
                             </ol>
                         </div>

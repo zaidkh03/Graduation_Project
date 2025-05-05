@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt2->bind_param("sssi", $national_id, $password, $role, $parent_id);
 
     if ($stmt2->execute()) {
-      echo "<script>alert('Parent registered successfully!'); window.location.href = 'dashboard.php';</script>";
+      echo "<script>alert('Parent registered successfully!'); window.location.href = '../pages/parents.php';</script>";
     } else {
       echo "Error inserting into users table: " . $stmt2->error;
     }

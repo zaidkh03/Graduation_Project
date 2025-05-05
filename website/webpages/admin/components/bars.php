@@ -1,7 +1,7 @@
 <!-- Preloader -->
-<div class="preloader flex-column justify-content-center align-items-center">
+ <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="../../../dist/img/logo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
+  </div> 
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed-top">
@@ -67,7 +67,7 @@
                with font-awesome or any other icon font library -->
           
           <li class="nav-item">
-            <a href="dashboard.php" class="nav-link">
+            <a href="../pages/dashboard.php" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -77,7 +77,7 @@
           
           
           <li class="nav-item">
-            <a href="subjects.php" class="nav-link">
+            <a href="../pages/subjects.php" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Subjects
@@ -87,7 +87,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="teachers.php" class="nav-link">
+            <a href="../pages/teachers.php" class="nav-link">
               <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>
                 Teachers
@@ -97,7 +97,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="classes.php" class="nav-link">
+            <a href="../pages/classes.php" class="nav-link">
               <i class="nav-icon fas fa-school"></i>
               <p>
                 Classes
@@ -107,7 +107,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="parents.php" class="nav-link">
+            <a href="../pages/parents.php" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Parents
@@ -117,7 +117,7 @@
           </li>
           
           <li class="nav-item">
-            <a href="students.php" class="nav-link">
+            <a href="../pages/students.php" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Students
@@ -127,7 +127,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="admins.php" class="nav-link">
+            <a href="../pages/admins.php" class="nav-link">
               <i class="nav-icon fas fa-user-shield"></i>
               <p>
                 Admins

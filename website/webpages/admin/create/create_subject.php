@@ -1,3 +1,28 @@
+<?php
+// add_subject.php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+//include  Connect to database
+include '../../db_connection.php'; // adjust path if needed
+
+// Handle form submit
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $conn->real_escape_string($_POST['name']);
+    $description = $conn->real_escape_string($_POST['description']);
+    $book_name = $conn->real_escape_string($_POST['book_name']);
+
+    $sql = "INSERT INTO subjects (name, description, book_name) VALUES ('$name', '$description', '$book_name')";
+
+    if ($conn->query($sql)) {
+        header('Location: ../pages/subjects.php');
+        exit();
+    } else {
+        echo 'Insert failed: ' . $conn->error;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +47,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Create a Class</h1>
+                            <h1>Create a Subject</h1>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -34,42 +59,31 @@
                     <div class="col-md-12">
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">Create a Class</h3>
+                                <h3 class="card-title">Create a Subject</h3>
                             </div>
-
                             <div class="card-body p-0">
                                 <div class="bs-stepper linear">
                                     <div class="bs-stepper-content">
                                         <form method="POST">
                                             <div class="form-group">
-                                                <label for="School-ID">School ID</label>
-                                                <input type="text" class="form-control" id="School-ID" name="school_id" placeholder="Enter the School ID" required />
+                                                <label for="Subject-Name">Subject Name</label>
+                                                <input type="text" class="form-control" id="Subject-Name" name="name" placeholder="Enter the Name of the Subject" required />
                                             </div>
                                             <div class="form-group">
-                                                <label for="School-Year-ID">School Year ID</label>
-                                                <input type="text" class="form-control" id="School-Year-ID" name="school_year_id" placeholder="Enter the School Year ID" required />
+                                                <label for="Subject-Book-Name">Subject Book Name</label>
+                                                <input type="text" class="form-control" id="Subject-Book-Name" name="book_name" placeholder="Enter the Name of the Book" required />
                                             </div>
                                             <div class="form-group">
-                                                <label for="Grade">Grade</label>
-                                                <input type="text" class="form-control" id="Grade" name="grade" placeholder="Enter the Grade" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Section">Section</label>
-                                                <input type="text" class="form-control" id="Section" name="section" placeholder="Enter the Section" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Capacity">Capacity</label>
-                                                <input type="number" class="form-control" id="Capacity" name="capacity" placeholder="Enter the Capacity" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Mentor-Teacher-ID">Mentor Teacher ID</label>
-                                                <input type="text" class="form-control" id="Mentor-Teacher-ID" name="mentor_teacher_id" placeholder="Enter the Mentor Teacher ID" required />
+                                                <label for="Subject-Description">Subject Description</label>
+                                                <input type="text" class="form-control" id="Subject-Description" name="description" placeholder="Enter the Description of the Subject" required />
                                             </div>
 
                                             <div class="d-flex justify-content-between">
-                                                <a href="classes.php" style="color: white; text-decoration: none;">
+
+                                                <a href="../pages/subjects.php" style="color: white; text-decoration: none;">
                                                     <button type="button" class="btn btn-secondary">Cancel</button>
                                                 </a>
+
                                                 <button type="submit" class="btn btn-primary">
                                                     Submit
                                                 </button>
