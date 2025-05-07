@@ -84,10 +84,15 @@
                     </div>
                     <div class="info-card">
                       <h3><i class="fas fa-user-friends"></i> Parent Name</h3>
-                      <p><?php
+                      <?php
+                      
                       $table = array("students","parents");
+                      $value = "name";
                       $id=1;
-                      calling_data($table,$id);?></p>
+                      $forgien = "parent_id";
+                      calling_data($table,$value,$id,$forgien);
+
+                      ?></p>
                     </div>
                   </div>
                 </div>
