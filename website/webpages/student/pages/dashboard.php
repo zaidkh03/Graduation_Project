@@ -68,7 +68,13 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>10-b</h3>
+              <h3><?php
+              include '../../readData.php';
+                $table = "students";
+                $value = "current_grade";
+                $id = 1;
+                profile_dash_data($table,$value,$id);
+              ?></h3>
 
               <p>Class name</p>
             </div>

@@ -62,6 +62,15 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <?php
+                                            
+                                            include '../../readData.php';
+
+                                            $table = 'students';
+                                            $values = array("id","name");
+                                            $href = array("parent");
+                                            table_Data($table, $values,$href);
+                                            ?>
                       <tr>
                       <td>1</td>
                       <td>2023-10-01</td>

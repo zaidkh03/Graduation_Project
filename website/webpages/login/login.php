@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="left-panel">
       <div class="overlay-content">
         <img src="styles/logo.png" alt="Logo" class="logo" />
-        <h1 class="ishraf-title">إشراف</h1>
+        <h1 class="ishraf-title">Madrasati</h1>
       </div>
     </div>
     <div class="right-panel">

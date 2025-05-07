@@ -51,11 +51,28 @@
 <script src="../../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <!-- Search Filter Script -->
 <script>
-      $("#classSearchInput").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-        $("#example1 tbody tr").filter(function () {
-          var Name = $(this).find("td:nth-child(2)").text().toLowerCase();
-          $(this).toggle(Name.indexOf(value) > -1);
-        });
-      });
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("classSearchInput");
+  const tableRows = document.querySelectorAll("#example1 tbody tr");
+
+  searchInput.addEventListener("keyup", function () {
+    const value = searchInput.value.toLowerCase();
+
+    tableRows.forEach(function (row) {
+      let matchFound = false;
+
+      // Loop through each cell in the row
+      for (let cell of row.cells) {
+        if (cell.textContent.toLowerCase().includes(value)) {
+          matchFound = true;
+          break;
+        }
+      }
+
+      // Show or hide the row based on match
+      row.style.display = matchFound ? "" : "none";
+    });
+  });
+});
+
 </script>

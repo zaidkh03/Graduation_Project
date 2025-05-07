@@ -49,6 +49,8 @@
 <script src="../../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- BS-Stepper -->
 <script src="../../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Search Filter Script -->
 <script>
       //filter the table based on the selected class
