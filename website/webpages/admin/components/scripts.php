@@ -59,10 +59,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const value = searchInput.value.toLowerCase();
 
     tableRows.forEach(function (row) {
-      const nameCell = row.cells[1]; // second column (0-based index)
-      const nameText = nameCell.textContent.toLowerCase();
-      row.style.display = nameText.includes(value) ? "" : "none";
+      let matchFound = false;
+
+      // Loop through each cell in the row
+      for (let cell of row.cells) {
+        if (cell.textContent.toLowerCase().includes(value)) {
+          matchFound = true;
+          break;
+        }
+      }
+
+      // Show or hide the row based on match
+      row.style.display = matchFound ? "" : "none";
     });
   });
 });
+
 </script>
