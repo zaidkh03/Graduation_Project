@@ -1,3 +1,27 @@
+<?php
+require_once '../../login/auth/auth.php';
+requireRole('admin');
+
+$user = getCurrentUser();
+$teacherId = $user['related_id'];
+include_once '../../db_connection.php';
+
+$query = "
+  SELECT 
+    students.id, 
+    students.name AS student_name,
+    students.parent_id,
+    class.grade,
+    class.section
+  FROM students
+  LEFT JOIN academic_record ON academic_record.student_id = students.id
+  LEFT JOIN class ON academic_record.class_id = class.id
+  ORDER BY students.name ASC
+";
+
+$result = mysqli_query($conn, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,55 +90,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>John Doe</td>
-                                                <td>10-A</td>
-                                                <td>19646846513</td>
-                                                <td style="text-align: center">
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-sm btn-primary mr-1">
-                                                        <ion-icon name="create-outline"></ion-icon>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
-                                                        <ion-icon name="trash-outline"></ion-icon>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Jane Smith</td>
-                                                <td>9-B</td>
-                                                <td>191684684f6</td>
-                                                <td style="text-align: center">
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-sm btn-primary mr-1">
-                                                        <ion-icon name="create-outline"></ion-icon>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
-                                                        <ion-icon name="trash-outline"></ion-icon>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Michael Brown</td>
-                                                <td>8-C</td>
-                                                <td>20654984984</td>
-                                                <td style="text-align: center">
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-sm btn-primary mr-1">
-                                                        <ion-icon name="create-outline"></ion-icon>
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-danger">
-                                                        <ion-icon name="trash-outline"></ion-icon>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            <?php if ($result && mysqli_num_rows($result) > 0): ?>
+                                                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                                                    <tr>
+                                                        <td><?= $row['id'] ?></td>
+                                                        <td><?= htmlspecialchars($row['student_name']) ?></td>
+                                                        <td><?= $row['grade'] ? "Grade {$row['grade']} - {$row['section']}" : 'Not Assigned' ?></td>
+                                                        <td><?= $row['parent_id'] ?></td>
+                                                        <td style="text-align: center">
+                                                            <a href="../edit/edit_students.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary mr-1">
+                                                                <ion-icon name="create-outline"></ion-icon>
+                                                            </a>
+                                                            <a href="../delete/delete_student.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this student?');">
+                                                                <ion-icon name="trash-outline"></ion-icon>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endwhile; ?>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td colspan="5" class="text-center">No students found.</td>
+                                                </tr>
+                                            <?php endif; ?>
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>

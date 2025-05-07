@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
+  <!-- Include the auth component -->
+  <?php include_once '../../login/auth/init.php'; ?>
   <!-- Include the header component -->
   <?php include_once '../components/header.php';?>
 </head>

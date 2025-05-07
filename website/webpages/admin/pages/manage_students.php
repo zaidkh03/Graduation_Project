@@ -50,8 +50,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $new_ids = $_POST['students'] ?? [];
   if (count($new_ids) <= $capacity) {
     $json_data = json_encode(["students" => $new_ids]);
-    $conn->query("UPDATE class SET students_json = '$json_data' WHERE id = $class_id");
-    header("Location: ../pages/classes.php");
+    $conn->begin_transaction();
+
+    try {
+      $conn->query("UPDATE class SET students_json = '$json_data' WHERE id = $class_id");
+    
+      // Remove old academic records for this class
+      $conn->query("DELETE FROM academic_record WHERE class_id = $class_id");
+    
+      // Insert new academic records
+      $school_year_id = $class['school_year_id'];
+      $stmt = $conn->prepare("INSERT INTO academic_record (student_id, class_id, school_year_id) VALUES (?, ?, ?)");
+      foreach ($new_ids as $student_id) {
+        $stmt->bind_param("iii", $student_id, $class_id, $school_year_id);
+        $stmt->execute();
+      }
+    
+      $conn->commit();
+      header("Location: ../pages/classes.php");
+      exit;
+    } catch (Exception $e) {
+      $conn->rollback();
+      echo "<script>alert('Error assigning students.');</script>";
+    }
+        header("Location: ../pages/classes.php");
     exit;
   } else {
     echo "<script>alert('Student count exceeds class capacity.');</script>";
