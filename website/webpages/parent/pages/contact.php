@@ -1,3 +1,24 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+// Include session + role protection + get $adminId
+require_once '../../login/auth/init.php';
+if ($user['role'] !== 'parent') {
+  header("Location: ../../login/login.php");
+  exit();
+}
+
+$parentId =  $user['related_id'];
+$table = 'parents';
+include_once '../../db_connection.php';
+
+// Fetch admin data using the related ID
+$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM parents WHERE id = ?");
+$stmt->bind_param("i", $parentId);
+$stmt->execute();
+$result = $stmt->get_result();
+$parentData = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +27,8 @@
   <title>Dashboard</title>
   <!-- Include the header component -->
   <?php include_once '../components/header.php';?>
+  <!-- Include the data component -->
+  <?php include_once '../../readData.php';?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -39,11 +62,11 @@
                   <table class="mx-auto">
                     <tr>
                       <td><i class="fas fa-phone"></i></td>
-                      <td><a href="tel:0799999999">0799999999</a></td>
+                      <td><a href="tel"><?php profile_dash_data('admin','phone',1) ?></a></td>
                     </tr>
                     <tr>
                       <td><i class="fas fa-envelope"></i></td>
-                      <td><a href="mailto:Email@domain.com">Email@domain.com</a></td>
+                      <td><a href="mailto"><?php profile_dash_data('admin','email',1) ?></a></td>
                     </tr>
                   </table>
                 </div>
@@ -58,11 +81,11 @@
                   <table class="mx-auto">
                     <tr>
                       <td><i class="fas fa-phone"></i></td>
-                      <td><a href="tel:0799999999">0799999999</a></td>
+                      <td><a href="tel:0799999999"><?php profile_dash_data('school','phone',1) ?></a></td>
                     </tr>
                     <tr>
                       <td><i class="fas fa-envelope"></i></td>
-                      <td><a href="mailto:Email@domain.com">Email@domain.com</a></td>
+                      <td><a href="mailto:Email@domain.com"><?php profile_dash_data('school','email',1) ?></a></td>
                     </tr>
                     <tr>
                       <td><i class="fas fa-link"></i></td>
@@ -70,7 +93,7 @@
                     </tr>
                     <tr>
                       <td><i class="fas fa-map-marker-alt"></i></td>
-                      <td><a href="#">School Location click to see direction</a></td>
+                      <td><a href="#"><?php profile_dash_data('school','location',1) ?></a></td>
                     </tr>
                   </table>
                 </div>

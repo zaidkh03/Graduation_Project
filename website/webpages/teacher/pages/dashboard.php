@@ -1,3 +1,24 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+// Include session + role protection + get $adminId
+require_once '../../login/auth/init.php';
+if ($user['role'] !== 'teacher') {
+  header("Location: ../../login/login.php");
+  exit();
+}
+
+$teacherId =  $user['related_id'];
+$table = 'teachers';
+include_once '../../db_connection.php';
+
+// Fetch admin data using the related ID
+$stmt = $conn->prepare("SELECT name, national_id, email, phone,subject_id FROM teachers WHERE id = ?");
+$stmt->bind_param("i", $teacherId);
+$stmt->execute();
+$result = $stmt->get_result();
+$teacherData = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

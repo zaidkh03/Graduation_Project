@@ -1,3 +1,24 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+// Include session + role protection + get $adminId
+require_once '../../login/auth/init.php';
+if ($user['role'] !== 'parent') {
+  header("Location: ../../login/login.php");
+  exit();
+}
+
+$parentId =  $user['related_id'];
+$table = 'parents';
+include_once '../../db_connection.php';
+
+// Fetch admin data using the related ID
+$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM parents WHERE id = ?");
+$stmt->bind_param("i", $parentId);
+$stmt->execute();
+$result = $stmt->get_result();
+$parentData = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +26,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
+  <?php include_once '../../login/auth/init.php'; ?>
+
   <!-- Include the header component -->
   <?php include_once '../components/header.php'; ?>
 </head>

@@ -1,3 +1,24 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+// Include session + role protection + get $adminId
+require_once '../../login/auth/init.php';
+if ($user['role'] !== 'parent') {
+  header("Location: ../../login/login.php");
+  exit();
+}
+
+$parentId =  $user['related_id'];
+$table = 'parents';
+include_once '../../db_connection.php';
+
+// Fetch admin data using the related ID
+$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM parents WHERE id = ?");
+$stmt->bind_param("i", $parentId);
+$stmt->execute();
+$result = $stmt->get_result();
+$parentData = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +28,8 @@
   <title>Dashboard</title>
   <!-- Include the header component -->
   <?php include_once '../components/header.php'; ?>
+  <!-- Include the readData -->
+  <?php include_once '../../readData.php'; ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -28,7 +51,7 @@
         </div>
       </div>
 
-      <<section class="content">
+      <section class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
@@ -61,12 +84,7 @@
                     </div>
                     <div class="col-md-4">
                       <label for="filterCapacity">Select the Student</label>
-                      <select
-                        id="filterCapacity"
-                        class="form-control form-control-sm">
-                        <option value="student2">Student 1</option>
-                        <option value="student2">Student 2</option>
-                      </select>
+                      <?php select_Data('students','name',$parentId,'parent_id') ?>
                     </div>
                   </div>
 

@@ -20,8 +20,8 @@ $result = $conn->query($sql);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
     <!-- Include the auth component -->
-    <?php include_once '../components/auth.php';?>
-  <?php include_once '../components/header.php'; ?>
+    <?php include_once '../../login/auth/init.php'; ?>
+    <?php include_once '../components/header.php'; ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -98,7 +98,7 @@ $result = $conn->query($sql);
                       </tr>
                     <?php endwhile; ?>
                   <?php else: ?>
-                    <tr><td colspan="5" class="text-center">No parents found.</td></tr>
+                    <tr><td colspan="6" class="text-center">No parents found.</td></tr>
                   <?php endif; ?>
                   </tbody>
                 </table>

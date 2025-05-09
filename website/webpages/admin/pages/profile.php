@@ -9,6 +9,7 @@ if ($user['role'] !== 'admin') {
 }
 
 $adminId = $user['related_id'];
+$adminrole = $user['role'];
 
 include_once '../../db_connection.php';
 
@@ -30,6 +31,8 @@ $adminData = $result->fetch_assoc();
     <?php include_once '../../login/auth/init.php'; ?>
   <!-- Include the header component -->
   <?php include_once '../components/header.php';?>
+  <!-- include the readData component -->
+  <?php include_once '../../readData.php';?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -56,22 +59,22 @@ $adminData = $result->fetch_assoc();
               <?= strtoupper(substr($adminData['name'], 0, 2)) ?>
             </div>
             <div class="profile-info">
-              <strong><?= htmlspecialchars($adminData['name']) ?></strong><br />
+              <strong><?php profile_dash_data($adminrole,'name',$adminId) ?></strong><br />
               <small><?= ucfirst($user['role']) ?></small>
               </div>
           </div>
           <div class="info-grid">
             <div class="info-card">
               <h3><i class="fas fa-address-card"></i> National ID</h3>
-              <p><?= htmlspecialchars($adminData['national_id']) ?></p>
+              <p><?php profile_dash_data($adminrole,'national_id',$adminId) ?></p>
             </div>
             <div class="info-card">
               <h3><i class="fas fa-phone"></i> Phone Number</h3>
-              <p><?= htmlspecialchars($adminData['phone']) ?></p>
+              <p><?php profile_dash_data($adminrole,'phone',$adminId )?></p>
             </div>
             <div class="info-card">
               <h3><i class="fas fa-envelope"></i> Email</h3>
-              <p><?= htmlspecialchars($adminData['email']) ?></p>
+              <p><?php profile_dash_data($adminrole,'email',$adminId )?></p>
             </div>
           </div>
         </div>

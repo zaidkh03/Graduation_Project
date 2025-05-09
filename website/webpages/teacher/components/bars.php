@@ -1,3 +1,24 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+// Include session + role protection + get $adminId
+require_once '../../login/auth/init.php';
+if ($user['role'] !== 'teacher') {
+  header("Location: ../../login/login.php");
+  exit();
+}
+
+$teacherId =  $user['related_id'];
+$table = 'teachers';
+include_once '../../db_connection.php';
+
+// Fetch admin data using the related ID
+$stmt = $conn->prepare("SELECT name, national_id, email, phone,subject_id FROM teachers WHERE id = ?");
+$stmt->bind_param("i", $teacherId);
+$stmt->execute();
+$result = $stmt->get_result();
+$teacherData = $result->fetch_assoc();
+?>
 <!-- Preloader -->
 <div class="preloader flex-column justify-content-center align-items-center">
   <img class="animation__shake" src="../../../dist/img/logo.png" alt="AdminLTELogo" height="60" width="60">
@@ -52,15 +73,10 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 ml-2 pl-1 mr-2 d-flex align-items-center" style="height: 50px;">
       <div style="width: 33px; height: 33px; font-size: 18px;  text-align: center; background: white; color: black; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-        <?php
-        $fullName = "John Doe";
-        $nameParts = explode(' ', $fullName);
-        $initials = strtoupper(substr($nameParts[0], 0, 1) . substr(end($nameParts), 0, 1));
-        echo $initials;
-        ?>
+        <?= strtoupper(substr($teacherData['name'], 0, 2)) ?>
       </div>
       <div class="info flex-grow-1 text-truncate">
-        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php echo htmlspecialchars($fullName); ?></a>
+        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php profile_dash_data($table,'name',$teacherId); ?></a>
       </div>
     </div>
 

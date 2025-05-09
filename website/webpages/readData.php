@@ -15,8 +15,6 @@ function table_Data($table, $values, $href)
     }
 
 
-    //check if the result has any rows
-    if (mysqli_num_rows($result) > 0) {
 
         // if the result has rows, loop through each row and print the values
         while ($row = $result->fetch_assoc()) {
@@ -98,34 +96,34 @@ function table_Data($table, $values, $href)
 
             echo "</tr>";
         }
-    }
-    // If the result has no rows, print a message indicating that no data was found
-    else {
-        echo "<tr><td colspan='6' class='text-center'>No data found.</td></tr>";
-    }
+    
 }
 
-function select_Data($table, $value, $id_value)
+function select_Data($table, $value, $id_value,$key)
 {
 
     // Include the database connection file
     include 'db_connection.php';
 
-    // Prepare the SQL query to select all data from the specified table
-    $sql = "SELECT * FROM $table WHERE id = $id_value";
-    $result = $conn->query($sql);
+    // Prepare and execute SQL query
+$sql = "SELECT * FROM $table WHERE $key = $id_value";
+$result = $conn->query($sql);
 
-    if (!$result) {
-        die("Query failed: " . $conn->error);
-    }
-    while ($row = $result->fetch_assoc()) {
-        echo " <select id='filterClass' class='form-control form-control-sm'>";
-        // Loop through the values array and print each value
-        foreach ($id_value as $column) {
-            echo "<option value='{$row[$value]}' onclick='view_class()'>{$row[$value]}</option>";
-        }
-        echo "</select>";
-    }
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
+
+// Output a single <select> element
+echo "<select id='filterClass' class='form-control form-control-sm' onchange='view_class()'>";
+
+// Loop through the results and create <option>s
+while ($row = $result->fetch_assoc()) {
+    // Change 'id' and 'name' to match your actual column names
+    echo "<option value='{$row['id']}'>{$row[$value]}</option>";
+}
+
+echo "</select>";
+
 }
 
 // function to call the data from tables based on the id
@@ -150,9 +148,11 @@ function profile_dash_data($table, $value, $id)
             echo "{$row[$value]}";
         }
     } else {
-        echo "<tr><td colspan='6' class='text-center'>No data found.</td></tr>";
+        echo "No data found.";
     }
 }
+// function to count the data that has the same things
+
 
 // function to call the data from other tables based on the foreign key
 function calling_data($table, $value, $id, $forgien)
@@ -191,7 +191,6 @@ function calling_data($table, $value, $id, $forgien)
                     echo "{$val}<br>";
                 }
             } else {
-                echo "{$row['value1']}<br>";
                 echo "{$row['value2']}<br>";
             }
         }
@@ -199,3 +198,58 @@ function calling_data($table, $value, $id, $forgien)
         echo " No data found.";
     }
 }
+
+function notifications($id){
+    // Include the database connection file
+    include 'db_connection.php';
+
+    // Prepare the SQL query to select all data from the specified table
+    $sql = "SELECT * FROM notifications WHERE user_id = $id";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die("Query failed: " . $conn->error);
+    }
+
+    // check if the result has any rows 
+    if (mysqli_num_rows($result) > 0) {
+        // print the data in the section you call it once 
+        while ($row = $result->fetch_assoc()) {
+            echo "<div class='dropdown-divider'></div>
+        <a  class='dropdown-item'>
+          <i class='fas fa-envelope mr-2'></i> {$row['message']}
+          <span class='float-right text-muted text-sm'>{$row['created_at']}</span>
+        </a>";
+        }
+    } else {
+        echo "<div class='dropdown-divider'></div>
+        <a  class='dropdown-item'>
+          <i class='fas fa-bell-slash mr-2'></i> No notifications available
+        </a>";
+    }
+}
+
+function student_role(){
+    
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+// Include session + role protection + get $adminId
+require_once '../../login/auth/init.php';
+if ($user['role'] !== 'student') {
+  header("Location: ../../login/login.php");
+  exit();
+}
+
+$studentId =  $user['related_id'];
+$table = 'students';
+include_once '../../db_connection.php';
+
+// Fetch admin data using the related ID
+$stmt = $conn->prepare("SELECT name, national_id, birth_date, gender, address, current_grade,parent_id FROM students WHERE id = ?");
+$stmt->bind_param("i", $studentId);
+$stmt->execute();
+$result = $stmt->get_result();
+$studentData = $result->fetch_assoc();
+
+}
+?>
