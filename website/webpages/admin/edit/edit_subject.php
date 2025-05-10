@@ -1,4 +1,6 @@
 <?php
+require_once '../../login/auth/init.php';
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -73,24 +75,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="card-body p-0">
               <div class="bs-stepper linear">
                 <div class="bs-stepper-content">
-                  <form method="POST">
+                    <form method="POST">
                     <div class="form-group">
                       <label for="Subject-Name">Subject Name</label>
-                      <input type="text" class="form-control" id="Subject-Name" name="name" value="<?= htmlspecialchars($subject['name']) ?>" required />
-                    </div>
-                    <div class="form-group">
-                      <label for="Subject-Description">Description</label>
-                      <input type="text" class="form-control" id="Subject-Description" name="description" value="<?= htmlspecialchars($subject['description']) ?>" required />
+                      <input type="text" class="form-control" id="Subject-Name" name="name" value="<?= htmlspecialchars($subject['name']) ?>" maxlength="30"  required />
                     </div>
                     <div class="form-group">
                       <label for="Subject-Book">Book Name</label>
-                      <input type="text" class="form-control" id="Subject-Book" name="book_name" value="<?= htmlspecialchars($subject['book_name']) ?>" required />
+                      <input type="text" class="form-control" id="Subject-Book" name="book_name" value="<?= htmlspecialchars($subject['book_name']) ?>" maxlength="30" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="Subject-Description">Description</label>
+                      <input type="text" class="form-control" id="Subject-Description" name="description" value="<?= htmlspecialchars($subject['description']) ?>" maxlength="100" required />
                     </div>
                     <div class="d-flex justify-content-between">
                       <a href="../pages/subjects.php" class="btn btn-secondary">Cancel</a>
                       <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
-                  </form>
+                    </form>
                 </div>
               </div>
             </div>

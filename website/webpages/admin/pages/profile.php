@@ -13,7 +13,7 @@ $adminId = $user['related_id'];
 include_once '../../db_connection.php';
 
 // Fetch admin data using the related ID
-$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM admin WHERE id = ?");
+$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM admins WHERE id = ?");
 $stmt->bind_param("i", $adminId);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -24,14 +24,70 @@ $adminData = $result->fetch_assoc();
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Profile</title>
+  <title>Profile</title>
 
     <!-- Include the auth component -->
     <?php include_once '../../login/auth/init.php'; ?>
   <!-- Include the header component -->
   <?php include_once '../components/header.php';?>
+  <style>
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .avatar {
+    background-color: #007bff;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .profile-info {
+    font-size: 18px;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .info-card {
+    background: #fff;
+    padding: 20px;
+    border-left: 4px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 600px) {
+    .profile-info {
+      font-size: 16px;
+    }
+
+    .avatar {
+      width: 70px;
+      height: 70px;
+      font-size: 20px;
+    }
+  }
+</style>
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+
   <div class="wrapper">
 
     <!-- Include the bars component -->
@@ -39,13 +95,18 @@ $adminData = $result->fetch_assoc();
 
     <div class="content-wrapper" style="margin-top: 50px;">
       <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1><i class="fas fa-user-circle"></i> Profile</h1>
-            </div>
-          </div>
+      <div class="container-fluid">
+        <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1><i class="fas fa-user-circle"></i> Profile</h1>
         </div>
+        <div class="col-sm-6 text-right">
+        <a href="../edit/edit_admin.php?id=<?= $adminId ?>&redirect=../pages/profile.php" class="btn btn-primary">
+        <i class="fas fa-edit"></i> Edit
+          </a>
+        </div>
+        </div>
+      </div>
       </section>
 
       <!-- Main content -->

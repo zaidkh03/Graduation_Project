@@ -1,4 +1,6 @@
 <?php
+require_once '../../login/auth/init.php';
+
 // Include the database connection
 include_once '../../db_connection.php';
 
@@ -23,8 +25,27 @@ $result = mysqli_query($conn, $query);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard</title>
+  <title>Classes</title>
   <?php include_once '../components/header.php'; ?>
+  <style>
+  @media (max-width: 576px) {
+    .btn {
+      margin-bottom: 6px;
+      width:auto;
+    }
+
+    .dataTables_filter input {
+      width: 100% !important;
+      margin-top: 5px;
+    }
+
+    .table td, .table th {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+  }
+</style>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -59,7 +80,9 @@ $result = mysqli_query($conn, $query);
                 <h3 class="card-title">Classes</h3>
               </div>
               <div class="card-body">
-                <div class="col-sm-12 col-md-6 mb-3">
+              <div class="row mb-3">
+  <div class="col-12 col-md-6">
+
                   <div id="example1_filter" class="dataTables_filter">
                     <label>
                       Search:
@@ -67,6 +90,10 @@ $result = mysqli_query($conn, $query);
                     </label>
                   </div>
                 </div>
+                </div>
+
+                <div class="table-responsive">
+
                 <table id="example1" class="table table-bordered table-striped">
                   <thead style="background-color: #343a40; color: white">
                     <tr>
@@ -98,13 +125,13 @@ $result = mysqli_query($conn, $query);
                       echo "<td>{$studentCount} / {$row['capacity']}</td>";
                       echo "<td style='text-align: center;'>$status</td>";
                       echo "<td style='text-align: center'>
-                              <a href='../edit/edit_class.php?id={$row['id']}' class='btn btn-sm btn-primary mr-1' title='Edit'>
+                              <a href='../edit/edit_class.php?id={$row['id']}' class='btn btn-sm btn-primary mr-0' title='Edit'>
                                 <ion-icon name='create-outline'></ion-icon>
                               </a>
-                              <a href='assign_subjects.php?class_id={$row['id']}' class='btn btn-sm btn-warning mr-1' title='Assign Subjects'>
+                              <a href='assign_subjects.php?class_id={$row['id']}' class='btn btn-sm btn-warning mr-0' title='Assign Subjects'>
                                 <ion-icon name='book-outline'></ion-icon>
                               </a>
-                              <a href='manage_students.php?class_id={$row['id']}' class='btn btn-sm btn-info mr-1' title='Manage Students'>
+                              <a href='manage_students.php?class_id={$row['id']}' class='btn btn-sm btn-info mr-0' title='Manage Students'>
                                 <ion-icon name='people-outline'></ion-icon>
                               </a>
                               <a href='../delete/delete_class.php?id={$row['id']}' class='btn btn-sm btn-danger' onclick='return confirm(\"Are you sure you want to delete this class?\")' title='Delete'>
@@ -119,6 +146,7 @@ $result = mysqli_query($conn, $query);
                   ?>
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
           </div>

@@ -34,6 +34,21 @@ switch ($user['role']) {
         $parentId = $user['related_id'];
         break;
     default:
+
+    $isMainAdmin = false;
+
+if ($user['role'] === 'admin') {
+    $stmt = $conn->prepare("SELECT admin_id FROM school LIMIT 1");
+    $stmt->execute();
+    $stmt->bind_result($schoolAdminId);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($schoolAdminId == $adminId) {
+        $isMainAdmin = true;
+    }
+}
+
         // Unknown role, destroy session and redirect
         session_unset();
         session_destroy();
