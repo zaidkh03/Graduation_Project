@@ -94,28 +94,28 @@ $studentData = $result->fetch_assoc();
               </tr>
             </thead>
             <tbody>
-              <tr>
-            <td>Mathematics</td>
-            <td>85</td>
-            <td>90</td>
-            <td>10</td>
-            <td>92</td>
-              </tr>
-              <tr>
-            <td>Science</td>
-            <td>78</td>
-            <td>88</td>
-            <td>12</td>
-            <td>89</td>
-              </tr>
-              <tr>
-            <td>History</td>
-            <td>80</td>
-            <td>85</td>
-            <td>15</td>
-            <td>87</td>
-              </tr>
-            </tbody>
+  <?php
+  if (!empty($marks)) {
+    foreach ($marks as $subject => $data) {
+      $firstScore = $data['first']['score'] ?? '-';
+      $secondScore = $data['second']['score'] ?? '-';
+      $participation = ($data['first']['participation'] ?? 0) + ($data['second']['participation'] ?? 0);
+      $final = $data['final'] ?? '-';
+
+      echo "<tr>";
+      echo "<td>$subject</td>";
+      echo "<td>$firstScore</td>";
+      echo "<td>$secondScore</td>";
+      echo "<td>$participation</td>";
+      echo "<td>$final</td>";
+      echo "</tr>";
+    }
+  } else {
+    echo "<tr><td colspan='5'>No grade data available.</td></tr>";
+  }
+  ?>
+</tbody>
+
           </table>
             </div>
           </div>
