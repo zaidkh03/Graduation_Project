@@ -1,3 +1,35 @@
+<?php
+$conn = new mysqli("localhost", "root", "", "test");
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// Define the current student (replace with session if available)
+$studentId = 1; // Example: use $_SESSION['student_id'] in real scenario
+
+// Fetch attendance JSON from academic_record
+$sql = "SELECT attendance_json FROM academic_record WHERE student_id = $studentId";
+$result = $conn->query($sql);
+
+$attendanceDates = [];
+
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $attendanceJson = json_decode($row['attendance_json'], true);
+        foreach ($attendanceJson as $subject => $dates) {
+            foreach ($dates as $date) {
+                $attendanceDates[] = $date;
+            }
+        }
+    }
+
+    // Remove duplicates and sort dates
+    $attendanceDates = array_unique($attendanceDates);
+    sort($attendanceDates);
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,19 +78,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                        <td style="width: 20%;">1</td>
-                        <td>2023-10-01</td>
-                        </tr>
-                        <tr>
-                        <td style="width: 20%;">2</td>
-                        <td>2023-10-02</td>
-                        </tr>
-                        <tr>
-                        <td style="width: 20%;">3</td>
-                        <td>2023-10-03</td>
-                        </tr>
-                        </tbody>
+                        <tbody>
+  <?php
+    $i = 1;
+    foreach ($attendanceDates as $date) {
+        echo "<tr>";
+        echo "<td>$i</td>";
+        echo "<td>$date</td>";
+        echo "</tr>";
+        $i++;
+    }
+
+    if (empty($attendanceDates)) {
+        echo "<tr><td colspan='2'>No attendance data available</td></tr>";
+    }
+  ?>
+</tbody>
+
+
                       </table>
                   </div>
                 </div>
