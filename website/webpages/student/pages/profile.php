@@ -42,12 +42,16 @@
                   <div class="info-grid">
                     <div class="info-card">
                       <h3><i class="fas fa-address-card"></i> National ID</h3>
-                      <p>value</p>
+                      <p><?php
+                      include '../../readData.php';
+                      $table = "students";
+                      $value = "national_id";
+                      $id=1;
+                      profile_dash_data($table,$value,$id);?></p>
                     </div>
                     <div class="info-card">
                       <h3><i class="fas fa-birthday-cake"></i> Date of Birth</h3>
                       <p><?php
-                      include '../../readData.php';
                       $table = "students";
                       $value = "birth_date";
                       $id=1;
@@ -56,19 +60,39 @@
                     </div>
                     <div class="info-card">
                       <h3><i class="fas fa-venus-mars"></i> Gender</h3>
-                      <p>value</p>
+                      <p><?php
+                      $table = "students";
+                      $value = "gender";
+                      $id=1;
+                      profile_dash_data($table,$value,$id);?></p>
                     </div>
                     <div class="info-card">
                       <h3><i class="fas fa-location-arrow"></i> Address</h3>
-                      <p>value</p>
+                      <p><?php
+                      $table = "students";
+                      $value = "address";
+                      $id=1;
+                      profile_dash_data($table,$value,$id);?></p>
                     </div>
                     <div class="info-card">
                       <h3><i class="fas fa-graduation-cap"></i> Current Grade</h3>
-                      <p>value</p>
+                      <p><?php
+                      $table = "students";
+                      $value = "current_grade";
+                      $id=1;
+                      profile_dash_data($table,$value,$id);?></p>
                     </div>
                     <div class="info-card">
                       <h3><i class="fas fa-user-friends"></i> Parent Name</h3>
-                      <p>value</p>
+                      <?php
+                      
+                      $table = array("students","parents");
+                      $value = "name";
+                      $id=1;
+                      $forgien = "parent_id";
+                      calling_data($table,$value,$id,$forgien);
+
+                      ?></p>
                     </div>
                   </div>
                 </div>

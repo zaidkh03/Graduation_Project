@@ -17,3 +17,4 @@ function rebuildSubjectTeacherMap($conn, $class_id) {
     $update->bind_param("si", $json, $class_id);
     $update->execute();
 }
+?>

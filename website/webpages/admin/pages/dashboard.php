@@ -1,17 +1,20 @@
+<?php include_once '../../login/auth/init.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
   <!-- Include the header component -->
-  <?php include_once '../components/header.php';?>
+  <?php include_once '../components/header.php'; ?>
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
     <!-- Include the bars component -->
-    <?php include_once '../components/bars.php';?>
+    <?php include_once '../components/bars.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="margin-top: 50px;">
@@ -20,7 +23,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Admin Dashboard</h1>
+              <h1>Dashboard</h1>
             </div>
           </div>
         </div><!-- /.container-fluid -->
@@ -30,53 +33,53 @@
       <section class="content">
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-info">
-            <div class="inner">
-              <h3>150</h3>
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>150</h3>
 
-              <p>New Orders</p>
+                  <p>New Orders</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-              <p>Bounce Rate</p>
+                  <p>Bounce Rate</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h3>44</h3>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3>44</h3>
 
-              <p>User Registrations</p>
+                  <p>User Registrations</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-danger">
-            <div class="inner">
-              <h3>65</h3>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3>65</h3>
 
-              <p>Unique Visitors</p>
+                  <p>Unique Visitors</p>
+                </div>
+              </div>
             </div>
+            <!-- ./col -->
           </div>
-        </div>
-        <!-- ./col -->
-      </div>
-      <!-- /.row -->
+          <!-- /.row -->
           <div class="row">
             <div class="col-md-6">
 
@@ -127,18 +130,19 @@
           <!-- /.row -->
         </div><!-- /.container-fluid -->
       </section>
-          <!-- /.content -->
+      <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
     <!-- Include the footer component -->
-    <?php include_once '../components/footer.php';?>
+    <?php include_once '../components/footer.php'; ?>
   </div>
   <!-- ./wrapper -->
 
   <!-- // Include the scripts component -->
-  <?php include_once '../components/scripts.php';?>
+  <?php include_once '../components/scripts.php'; ?>
   <!-- // Include the charts data component -->
-  <?php include_once '../components/chartsData.php';?>
+  <?php include_once '../components/chartsData.php'; ?>
 </body>
+
 </html>

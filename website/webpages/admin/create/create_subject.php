@@ -1,4 +1,6 @@
 <?php
+require_once '../../login/auth/init.php';
+
 // add_subject.php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -29,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard</title>
+    <title>Create Subject</title>
     <!-- Include the header component -->
     <?php include_once '../components/header.php'; ?>
 </head>
@@ -67,15 +69,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <form method="POST">
                                             <div class="form-group">
                                                 <label for="Subject-Name">Subject Name</label>
-                                                <input type="text" class="form-control" id="Subject-Name" name="name" placeholder="Enter the Name of the Subject" required />
+                                                <input type="text" class="form-control" id="Subject-Name" name="name" placeholder="Enter the Name of the Subject" maxlength="30" required />
                                             </div>
                                             <div class="form-group">
                                                 <label for="Subject-Book-Name">Subject Book Name</label>
-                                                <input type="text" class="form-control" id="Subject-Book-Name" name="book_name" placeholder="Enter the Name of the Book" required />
+                                                <input type="text" class="form-control" id="Subject-Book-Name" name="book_name" placeholder="Enter the Name of the Book" maxlength="30" required />
                                             </div>
                                             <div class="form-group">
                                                 <label for="Subject-Description">Subject Description</label>
-                                                <input type="text" class="form-control" id="Subject-Description" name="description" placeholder="Enter the Description of the Subject" required />
+                                                <input type="text" class="form-control" id="Subject-Description" name="description" placeholder="Enter the Description of the Subject" maxlength="100" required />
                                             </div>
 
                                             <div class="d-flex justify-content-between">

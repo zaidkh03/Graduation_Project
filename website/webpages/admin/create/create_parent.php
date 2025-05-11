@@ -1,23 +1,36 @@
 <?php
+require_once '../../login/auth/init.php';
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include '../../db_connection.php'; // Adjust path as needed
+include '../../db_connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $name = $_POST['name'];
-  $national_id = $_POST['national_id'];
-  $email = $_POST['email'];
-  $phone = $_POST['phone'];
+  $name = trim($_POST['name']);
+  $national_id = trim($_POST['national_id']);
+  $email = trim($_POST['email']);
+  $phone = trim($_POST['phone']);
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-  // 1. Insert into `parents` table
+  // Check for existing national ID or email
+  $check = $conn->prepare("SELECT id FROM parents WHERE national_id = ? OR email = ?");
+  $check->bind_param("ss", $national_id, $email);
+  $check->execute();
+  $check->store_result();
+
+  if ($check->num_rows > 0) {
+    echo "<script>alert('National ID or Email already exists.'); window.history.back();</script>";
+    exit;
+  }
+
+  // Insert into parents table
   $stmt = $conn->prepare("INSERT INTO parents (name, national_id, email, phone) VALUES (?, ?, ?, ?)");
   $stmt->bind_param("ssss", $name, $national_id, $email, $phone);
 
   if ($stmt->execute()) {
     $parent_id = $stmt->insert_id;
 
-    // 2. Insert into `users` table for login
+    // Create login in users table
     $role = 'parent';
     $stmt2 = $conn->prepare("INSERT INTO users (national_id, password, role, related_id) VALUES (?, ?, ?, ?)");
     $stmt2->bind_param("sssi", $national_id, $password, $role, $parent_id);
@@ -32,26 +45,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard</title>
-  <!-- Include the header component -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Parent</title>
   <?php include_once '../components/header.php'; ?>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
-
-    <!-- Include the bars component -->
     <?php include_once '../components/bars.php'; ?>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="margin-top: 50px;">
-      <!-- Content Header (Page header) -->
       <section class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -59,10 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
               <h1>Create Parent</h1>
             </div>
           </div>
-        </div><!-- /.container-fluid -->
+        </div>
       </section>
 
-      <!-- Main content -->
       <section class="content d-flex justify-content-center align-items-center" style="min-height: 80vh;">
         <div class="container-fluid">
           <div class="col-md-12">
@@ -75,35 +83,67 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="bs-stepper linear">
                   <div class="bs-stepper-content">
                     <form method="POST">
-                      <div class="form-group">
-                      <label for="Name">Name</label>
-                      <input type="text" class="form-control" id="Name" name="name" placeholder="Enter Name" required />
+                      <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="name" maxlength="30"
+                          class="form-control" placeholder="Enter Parent's Full Name" required>
                       </div>
-                      <div class="form-group">
-                      <label for="National-ID">National ID</label>
-                      <input type="text" class="form-control" id="National-ID" name="national_id" placeholder="Enter National ID" required />
+                      <div class="mb-3">
+                        <label class="form-label">National ID</label>
+                        <input
+                          type="text"
+                          name="national_id"
+                          class="form-control"
+                          maxlength="10"
+                          minlength="10"
+                          inputmode="numeric"
+                          pattern="\d{10}"
+                          placeholder="Enter 10-digit National ID"
+                          required
+                          oninvalid="this.setCustomValidity('Please enter exactly 10 digits')"
+                          oninput="this.setCustomValidity('')" />
                       </div>
-                      <div class="form-group">
-                      <label for="Email">Email</label>
-                      <input type="email" class="form-control" id="Email" name="email" placeholder="Enter Email" required />
+                      <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" maxlength="30"
+                          class="form-control" placeholder="Enter the Email of the Parent" required>
                       </div>
-                      <div class="form-group">
-                      <label for="Phone">Phone</label>
-                      <input type="text" class="form-control" id="Phone" name="phone" placeholder="Enter Phone Number" required />
+                      <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input
+                          type="text"
+                          name="phone"
+                          class="form-control"
+                          maxlength="10"
+                          minlength="10"
+                          inputmode="numeric"
+                          pattern="\d{10}"
+                          placeholder="Enter 10-digit Phone Number"
+                          required
+                          oninvalid="this.setCustomValidity('Please enter exactly 10 digits')"
+                          oninput="this.setCustomValidity('')" />
                       </div>
-                      <div class="form-group">
-                      <label for="Password">Password</label>
-                      <input type="password" class="form-control" id="Password" name="password" placeholder="Enter Password" required />
+                      <!-- Password -->
+                      <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <div class="input-group">
+                          <input type="password" name="password" id="passwordInput" class="form-control"
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+                            required placeholder="Enter a strong password">
+                          <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">Show</button>
+                        </div>
+                        <div id="passwordStrengthText" class="mt-1"></div>
+                        <div class="progress mt-1" style="height: 5px;">
+                          <div id="passwordStrengthBar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+                        </div>
                       </div>
-
                       <div class="d-flex justify-content-between">
-                      <a href="parents.php" style="color: white; text-decoration: none;">
-                        <button type="button" class="btn btn-secondary">Cancel</button>
-                      </a>
-
-                      <button type="submit" class="btn btn-primary">
-                        Submit
-                      </button>
+                        <a href="../pages/parents.php" style="color: white; text-decoration: none;">
+                          <button type="button" class="btn btn-secondary">Cancel</button>
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                          Submit
+                        </button>
                       </div>
                     </form>
                   </div>
@@ -114,16 +154,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
       </section>
     </div>
-    <!-- /.content-wrapper -->
 
-    <!-- Include the footer component -->
     <?php include_once '../components/footer.php'; ?>
   </div>
-  <!-- ./wrapper -->
 
-  <!-- // Include the scripts component -->
   <?php include_once '../components/scripts.php'; ?>
-  <!-- // Include the charts data component -->
   <?php include_once '../components/chartsData.php'; ?>
 </body>
 

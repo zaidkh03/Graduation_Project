@@ -1,12 +1,48 @@
+<?php
+// Turn on error reporting
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Database connection
+include_once '../../db_connection.php';
+
+// Fetch subjects
+$sql = "SELECT * FROM subjects"; // assuming your table is called 'subjects'
+$result = $conn->query($sql);
+
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard</title>
+    <title>Subjects</title>
+    <!-- Include the auth component -->
+    <?php include_once '../../login/auth/init.php'; ?>
     <!-- Include the header component -->
     <?php include_once '../components/header.php'; ?>
+    <style>
+  @media (max-width: 576px) {
+    .btn {
+      margin-bottom: 5px;
+    }
+
+    .dataTables_filter input {
+      width: 100% !important;
+      margin-top: 5px;
+    }
+
+    .table th, .table td {
+      font-size: 14px;
+    }
+  }
+</style>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -45,52 +81,41 @@
                                     <h3 class="card-title">Subjects</h3>
                                 </div>
                                 <div class="card-body">
-                                    <div class="col-sm-12 col-md-6 mb-3">
-                                        <div id="example1_filter" class="dataTables_filter">
-                                            <label>
-                                                Search:
-                                                <input
-                                                    type="search"
-                                                    id="classSearchInput"
-                                                    class="form-control form-control-sm"
-                                                    placeholder="Search for Subjects..."
-                                                    aria-controls="example1" />
-                                            </label>
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-6">
+
+                                            <div id="example1_filter" class="dataTables_filter">
+                                                <label>
+                                                    Search:
+                                                    <input
+                                                        type="search"
+                                                        id="classSearchInput"
+                                                        class="form-control form-control-sm"
+                                                        placeholder="Search for Subjects..."
+                                                        aria-controls="example1" />
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead style="background-color: #343a40; color: white">
-                                            <tr style="text-align:center;">
-                                                <th style="width: 50px;">ID</th>
-                                                <th>Subject Name</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            // Turn on error reporting
-                                            ini_set('display_errors', 1);
-                                            ini_set('display_startup_errors', 1);
-                                            error_reporting(E_ALL);
+                                    <div class="table-responsive">
 
-                                            // Database connection
-                                            include_once '../../db_connection.php';
-
-                                            // Fetch subjects
-                                            $sql = "SELECT * FROM subjects"; // assuming your table is called 'subjects'
-                                            $result = $conn->query($sql);
-
-                                            if (!$result) {
-                                                die("Query failed: " . $conn->error);
-                                            }
-
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead style="background-color: #343a40; color: white">
+                                                <tr style="text-align:center;">
+                                                    <th style="width: 50px;">ID</th>
+                                                    <th>Subject Name</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "
                                                         <tr style='text-align:center;'>
                                                             <td>{$row['id']}</td>
                                                             <td>{$row['name']}</td>
                                                             <td>
-                                                                <a href='../edit/edit_subject.php?id={$row['id']}' class='btn btn-sm btn-primary mr-1' title='Edit'>
+                                                                <a href='../edit/edit_subject.php?id={$row['id']}' class='btn btn-sm btn-primary mr-0' title='Edit'>
                                                                     <ion-icon name='create-outline'></ion-icon>
                                                                 </a>
                                                                 <a href='../delete/delete_subject.php?id={$row['id']}' class='btn btn-sm btn-danger' title='Delete'>
@@ -99,11 +124,11 @@
                                                             </td>
                                                         </tr>
                                                         ";
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
