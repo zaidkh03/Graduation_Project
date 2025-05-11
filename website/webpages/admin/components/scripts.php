@@ -1,3 +1,9 @@
+<script>
+  history.pushState(null, null, location.href);
+  window.addEventListener('popstate', function () {
+    history.pushState(null, null, location.href);
+  });
+</script>
 <!-- jQuery -->
 <script src="../../../plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -68,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
           break;
         }
       }
-
       // Show or hide the row based on match
       row.style.display = matchFound ? "" : "none";
     });
@@ -76,3 +81,111 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+
+<script>
+function togglePassword() {
+  const input = document.getElementById('passwordInput');
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+
+document.getElementById('passwordInput').addEventListener('input', function () {
+  const pwd = this.value;
+  const strengthText = document.getElementById('passwordStrengthText');
+  const strengthBar = document.getElementById('passwordStrengthBar');
+  let score = 0;
+
+  if (pwd.length >= 8) score++;
+  if (/[a-z]/.test(pwd)) score++;
+  if (/[A-Z]/.test(pwd)) score++;
+  if (/\d/.test(pwd)) score++;
+  if (/[@$!%*?&]/.test(pwd)) score++;
+
+  // Strength classification
+  let width = score * 20;
+  let color = '';
+  let label = '';
+
+  if (score <= 2) {
+    color = 'bg-danger';
+    label = 'Weak';
+  } else if (score === 3 || score === 4) {
+    color = 'bg-warning';
+    label = 'Moderate';
+  } else if (score === 5) {
+    color = 'bg-success';
+    label = 'Strong';
+  }
+
+  strengthBar.style.width = width + '%';
+  strengthBar.className = 'progress-bar ' + color;
+  strengthText.textContent = pwd.length > 0 ? `Strength: ${label}` : '';
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function () {
+  $('#Parent-ID').select2({
+    theme: 'bootstrap5',
+    width: '100%',
+    placeholder: 'Search parent by ID, national ID, or name',
+    allowClear: true
+  });
+  $('#Parent-ID').on('select2:open', function () {
+  document.querySelector('.select2-container input.select2-search__field')?.focus();
+});
+
+});
+
+</script>
+
+<script>
+  document.getElementById("gradeSelect").addEventListener("change", function () {
+    const grade = this.value;
+    const sectionInput = document.getElementById("sectionInput");
+
+    if (grade) {
+      fetch("?ajax_section_for_grade=" + grade)
+        .then(response => response.text())
+        .then(data => {
+          sectionInput.value = data;
+        })
+        .catch(error => {
+          sectionInput.value = '';
+          console.error("Error:", error);
+        });
+    } else {
+      sectionInput.value = '';
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fullscreenBtn = document.querySelector('[data-widget="fullscreen"]');
+
+    if (fullscreenBtn) {
+      fullscreenBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().then(() => {
+            localStorage.setItem('stayFullscreen', 'true');
+          });
+        } else {
+          document.exitFullscreen().then(() => {
+            localStorage.removeItem('stayFullscreen');
+          });
+        }
+      });
+    }
+
+    // Re-enter fullscreen if it was previously set
+    if (localStorage.getItem('stayFullscreen') === 'true' && !document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => {
+        console.warn('Fullscreen request failed:', err);
+      });
+    }
+  });
+</script>
+

@@ -1,4 +1,6 @@
 <?php
+require_once '../../login/auth/init.php';
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -21,9 +23,8 @@ if (isset($_GET['id'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $conn->real_escape_string($_POST['name']);
     $phone = $conn->real_escape_string($_POST['phone']);
-    $subject_id = intval($_POST['subject_id']);
 
-    $update_sql = "UPDATE teachers SET name='$name', phone='$phone', subject_id=$subject_id WHERE id=$id";
+    $update_sql = "UPDATE teachers SET name='$name', phone='$phone' WHERE id=$id";
 
     if ($conn->query($update_sql)) {
         // Rebuild subject_teacher_map for all classes this teacher is involved in
@@ -78,22 +79,15 @@ $subjects_result = $conn->query("SELECT id, name FROM subjects");
                   <form method="POST">
                     <div class="form-group">
                       <label for="Teacher-Name">Teacher Name</label>
-                      <input type="text" class="form-control" id="Teacher-Name" name="name" value="<?= htmlspecialchars($teacher['name']) ?>" required />
+                      <input type="text" class="form-control" id="Teacher-Name" name="name" value="<?= htmlspecialchars($teacher['name']) ?>" maxlength="30" required />
+                    </div>
+                    <div class="form-group">
+                      <label for="Teacher-Email">Email</label>
+                      <input type="email" class="form-control" id="Teacher-Email" name="email" value="<?= htmlspecialchars($teacher['email']) ?>" maxlength="30" required />
                     </div>
                     <div class="form-group">
                       <label for="Teacher-Phone">Phone Number</label>
-                      <input type="text" class="form-control" id="Teacher-Phone" name="phone" value="<?= htmlspecialchars($teacher['phone']) ?>" required />
-                    </div>
-                    <div class="form-group">
-                      <label for="Teacher-Subject">Subject</label>
-                      <select class="form-control" id="Teacher-Subject" name="subject_id" required>
-                        <option value="">Select Subject</option>
-                        <?php while ($subject = $subjects_result->fetch_assoc()): ?>
-                          <option value="<?= $subject['id'] ?>" <?= ($subject['id'] == $teacher['subject_id']) ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($subject['name']) ?>
-                          </option>
-                        <?php endwhile; ?>
-                      </select>
+                      <input type="text" class="form-control" id="Teacher-Phone" name="phone" value="<?= htmlspecialchars($teacher['phone']) ?>" maxlength="10" minlength="10" inputmode="numeric" pattern="\d{10}" oninvalid="this.setCustomValidity('Please enter exactly 10 digits')" required />
                     </div>
                     <div class="d-flex justify-content-between">
                       <a href="../pages/teachers.php" class="btn btn-secondary">Cancel</a>

@@ -14,7 +14,7 @@ $adminrole = $user['role'];
 include_once '../../db_connection.php';
 
 // Fetch admin data using the related ID
-$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM admin WHERE id = ?");
+$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM admins WHERE id = ?");
 $stmt->bind_param("i", $adminId);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -25,7 +25,7 @@ $adminData = $result->fetch_assoc();
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Profile</title>
+  <title>Profile</title>
 
     <!-- Include the auth component -->
     <?php include_once '../../login/auth/init.php'; ?>
@@ -35,6 +35,7 @@ $adminData = $result->fetch_assoc();
   <?php include_once '../../readData.php';?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+
   <div class="wrapper">
 
     <!-- Include the bars component -->
@@ -42,13 +43,18 @@ $adminData = $result->fetch_assoc();
 
     <div class="content-wrapper" style="margin-top: 50px;">
       <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1><i class="fas fa-user-circle"></i> Profile</h1>
-            </div>
-          </div>
+      <div class="container-fluid">
+        <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1><i class="fas fa-user-circle"></i> Profile</h1>
         </div>
+        <div class="col-sm-6 text-right">
+        <a href="../edit/edit_admin.php?id=<?= $adminId ?>&redirect=../pages/profile.php" class="btn btn-primary">
+        <i class="fas fa-edit"></i> Edit
+          </a>
+        </div>
+        </div>
+      </div>
       </section>
 
       <!-- Main content -->

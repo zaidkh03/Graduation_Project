@@ -1,4 +1,6 @@
 <?php
+require_once '../../login/auth/init.php';
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -17,8 +19,9 @@ if ($result->num_rows == 0) {
 }
 $student = $result->fetch_assoc();
 
-$parents = $conn->query("SELECT id, name FROM parents");
+$parents = $conn->query("SELECT id, name, national_id FROM parents ORDER BY id DESC");
 
+$current_grade = isset($student['current_grade']) ? (int)$student['current_grade'] : 1;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $conn->real_escape_string($_POST['name']);
     $national_id = $conn->real_escape_string($_POST['national_id']);
@@ -27,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = $conn->real_escape_string($_POST['address']);
     $parent_id = intval($_POST['parent_id']);
 
-    $update_sql = "UPDATE students SET name='$name', national_id='$national_id', birth_date='$birth_date', gender='$gender', address='$address', parent_id=$parent_id WHERE id=$id";
+    $update_sql = "UPDATE students SET name='$name', national_id='$national_id', birth_date='$birth_date', gender='$gender', address='$address', parent_id=$parent_id, current_grade=$current_grade WHERE id=$id";
 
     if ($conn->query($update_sql)) {
         header('Location: ../pages/students.php?status=success');
@@ -74,47 +77,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="bs-stepper linear">
                                     <div class="bs-stepper-content">
                                         <form method="POST">
-                                            <div class="form-group">
-                                                <label for="Student-Name">Full Name</label>
-                                                <input type="text" class="form-control" id="Student-Name" name="name" value="<?= htmlspecialchars($student['name']) ?>" required />
+                                            <!-- Full Name -->
+                                            <div class="mb-3">
+                                                <label class="form-label" for="Student-Name">Full Name</label>
+                                                <input type="text" class="form-control" id="Student-Name" name="name"
+                                                    maxlength="30" required
+                                                    value="<?= htmlspecialchars($student['name']) ?>"
+                                                    placeholder="Enter full name"
+                                                    oninvalid="this.setCustomValidity('Name is required and must not exceed 30 characters')"
+                                                    oninput="this.setCustomValidity('')" />
                                             </div>
-                                            <div class="form-group">
-                                                <label for="Student-National-ID">National ID</label>
-                                                <input type="text" class="form-control" id="Student-National-ID" name="national_id" value="<?= htmlspecialchars($student['national_id']) ?>" required />
+
+                                            <!-- National ID (disabled input + hidden field) -->
+                                            <div class="mb-3">
+                                                <label class="form-label" for="Student-National-ID">National ID</label>
+                                                <input type="text" class="form-control" id="Student-National-ID"
+                                                    value="<?= htmlspecialchars($student['national_id']) ?>"
+                                                    disabled readonly />
+                                                <input type="hidden" name="national_id" value="<?= htmlspecialchars($student['national_id']) ?>" />
                                             </div>
-                                            <div class="form-group">
-                                                <label for="Student-Birth-Date">Birth Date</label>
-                                                <input type="date" class="form-control" id="Student-Birth-Date" name="birth_date" value="<?= $student['birth_date'] ?>" required />
+
+                                            <!-- Birth Date -->
+                                            <div class="mb-3">
+                                                <label class="form-label" for="Student-Birth-Date">Birth Date</label>
+                                                <input type="date" class="form-control" id="Student-Birth-Date" name="birth_date"
+                                                    value="<?= $student['birth_date'] ?>" required />
                                             </div>
+
+                                            <!-- Gender -->
                                             <div class="mb-3">
                                                 <label class="form-label">Gender</label>
                                                 <select name="gender" class="form-control" required>
                                                     <option value="">Select gender</option>
-                                                    <option value="male" <?= $student['gender'] === 'Male' ? 'selected' : '' ?>>Male</option>
-                                                    <option value="female" <?= $student['gender'] === 'Female' ? 'selected' : '' ?>>Female</option>
+                                                    <option value="male" <?= strtolower($student['gender']) === 'male' ? 'selected' : '' ?>>Male</option>
+                                                    <option value="female" <?= strtolower($student['gender']) === 'female' ? 'selected' : '' ?>>Female</option>
                                                 </select>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="Student-Address">Address</label>
-                                                <textarea class="form-control" id="Student-Address" name="address" required><?= htmlspecialchars($student['address']) ?></textarea>
+                                            <!-- Address -->
+                                            <div class="mb-3">
+                                                <label class="form-label" for="Student-Address">Address</label>
+                                                <textarea class="form-control" id="Student-Address" name="address"
+                                                    maxlength="100" required
+                                                    placeholder="Enter full address"
+                                                    oninvalid="this.setCustomValidity('Address is required and must not exceed 100 characters')"
+                                                    oninput="this.setCustomValidity('')"><?= htmlspecialchars($student['address']) ?></textarea>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="Parent-ID">Parent</label>
+
+                                            <!-- Current Grade -->
+                                            <div class="mb-3">
+                                                <label class="form-label" for="Student-Grade">Current Grade</label>
+                                                <select class="form-control" id="Student-Grade" name="current_grade" required>
+                                                    <?php for ($i = 1; $i <= 12; $i++): ?>
+                                                        <option value="<?= $i ?>" <?= $i == $current_grade ? 'selected' : '' ?>><?= $i ?></option>
+                                                    <?php endfor; ?>
+                                                </select>
+                                            </div>
+
+
+                                            <!-- Parent -->
+                                            <div class="mb-3">
+                                                <label class="form-label" for="Parent-ID">Parent</label>
                                                 <select class="form-control" id="Parent-ID" name="parent_id" required>
                                                     <option value="">Select Parent</option>
                                                     <?php while ($p = $parents->fetch_assoc()): ?>
-                                                        <option value="<?= $p['id'] ?>" <?= ($p['id'] == $student['parent_id']) ? 'selected' : '' ?>>
-                                                            <?= htmlspecialchars($p['name']) ?> (ID: <?= $p['id'] ?>)
+                                                        <option value="<?= $p['id'] ?>" <?= $p['id'] == $student['parent_id'] ? 'selected' : '' ?>>
+                                                            <?= $p['id'] ?> - <?= htmlspecialchars($p['national_id']) ?> - <?= htmlspecialchars($p['name']) ?>
                                                         </option>
                                                     <?php endwhile; ?>
                                                 </select>
                                             </div>
+
+                                            <!-- Submit -->
                                             <div class="d-flex justify-content-between">
                                                 <a href="../pages/students.php" class="btn btn-secondary">Cancel</a>
                                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                                             </div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>

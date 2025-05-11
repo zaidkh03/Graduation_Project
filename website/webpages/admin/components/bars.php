@@ -60,7 +60,7 @@ $adminData = $result->fetch_assoc();
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../pages/dashboard.php" class="brand-link">
+    <a class="brand-link">
       <img src="../../../dist/img/logo2.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Madrasati</span>
     </a>
@@ -73,7 +73,7 @@ $adminData = $result->fetch_assoc();
         <?= strtoupper(substr($adminData['name'], 0, 2)) ?>
       </div>
       <div class="info flex-grow-1 text-truncate">
-        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php profile_dash_data($adminrole,'name',$adminId) ?></a>
+        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php echo htmlspecialchars($fullName); ?></a>
       </div>
     </div>
 

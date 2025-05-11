@@ -1,4 +1,5 @@
 <?php
+require_once '../../login/auth/init.php';
 
 
 // Enable error reporting for debugging
@@ -9,7 +10,20 @@ error_reporting(E_ALL);
 include '../../db_connection.php';
 
 // Fetch all parents from the database
-$sql = "SELECT * FROM parents ORDER BY id ASC";
+$sql = "
+SELECT 
+    p.id,
+    p.name,
+    p.national_id,
+    p.email,
+    p.phone,
+    COUNT(s.id) AS student_count
+FROM parents p
+LEFT JOIN students s ON s.parent_id = p.id
+GROUP BY p.id, p.name, p.national_id, p.email, p.phone
+ORDER BY p.id ASC
+";
+
 $result = $conn->query($sql);
 ?>
 
@@ -18,8 +32,38 @@ $result = $conn->query($sql);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard</title>
+  <title>Parents</title>
     <!-- Include the auth component -->
+  <?php include_once '../components/header.php'; ?>
+  <style>
+  @media (max-width: 576px) {
+    .btn {
+      margin-bottom: 6px;
+      width: auto;
+    }
+
+    .dataTables_filter input {
+      width: 100% !important;
+      margin-top: 5px;
+    }
+
+    .table th,
+    .table td {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .breadcrumb .btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+</style>
+
     <?php include_once '../../login/auth/init.php'; ?>
     <?php include_once '../components/header.php'; ?>
 </head>
@@ -57,21 +101,26 @@ $result = $conn->query($sql);
                 <h3 class="card-title">Parents</h3>
               </div>
               <div class="card-body">
-                <div class="col-sm-12 col-md-6 mb-3">
+              <div class="row mb-3">
+  <div class="col-12 col-md-6">
                   <div class="dataTables_filter">
                     <label>
                       Search:
-                      <input type="search" id="parentSearchInput" class="form-control form-control-sm"
+                      <input type="search" id="classSearchInput" class="form-control form-control-sm"
                              placeholder="Search for parents..." aria-controls="example1"/>
                     </label>
                   </div>
                 </div>
+              </div>
+                <div class="table-responsive">
+
                 <table id="example1" class="table table-bordered table-striped">
                   <thead style="background-color: #343a40; color: white">
                   <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>National ID</th>
+                    <th>Students</th>
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Actions</th>
@@ -84,10 +133,11 @@ $result = $conn->query($sql);
                         <td><?= $row['id'] ?></td>
                         <td><?= htmlspecialchars($row['name']) ?></td>
                         <td><?= htmlspecialchars($row['national_id']) ?></td>
+                        <td><?= $row['student_count'] ?></td> <!-- NEW DATA -->
                         <td><?= htmlspecialchars($row['email']) ?></td>
                         <td><?= htmlspecialchars($row['phone']) ?></td>
                         <td style="text-align: center">
-                          <a href="../edit/edit_parent.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary mr-1" title="Edit">
+                          <a href="../edit/edit_parent.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-primary mr-0" title="Edit">
                             <ion-icon name="create-outline"></ion-icon>
                           </a>
                           <a href="../delete/delete_parent.php?id=<?= $row['id'] ?>" class="btn btn-sm btn-danger" title="Delete"
@@ -102,6 +152,7 @@ $result = $conn->query($sql);
                   <?php endif; ?>
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
           </div>

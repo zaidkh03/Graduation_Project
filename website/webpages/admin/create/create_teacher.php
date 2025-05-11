@@ -1,4 +1,6 @@
 <?php
+require_once '../../login/auth/init.php';
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include '../../db_connection.php'; // adjust path if needed
@@ -44,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard</title>
+  <title>Create Teacher</title>
   <!-- Include the header component -->
   <?php include_once '../components/header.php'; ?>
 </head>
@@ -86,11 +88,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <form method="POST">
                       <div class="mb-3">
                         <label class="form-label">Full Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter Teacher's Full Name" required>
+                        <input type="text" name="name" maxlength="30"
+                          class="form-control" placeholder="Enter Teacher's Full Name" required>
                       </div>
                       <div class="mb-3">
                         <label class="form-label">National ID</label>
-                        <input type="text" name="national_id" class="form-control" maxlength="10" inputmode="numeric" pattern="[0-9]*" placeholder="Enter the National ID of the Teacher" required>
+                        <input
+                          type="text"
+                          name="national_id"
+                          class="form-control"
+                          maxlength="10"
+                          minlength="10"
+                          inputmode="numeric"
+                          pattern="\d{10}"
+                          placeholder="Enter 10-digit National ID"
+                          required
+                          oninvalid="this.setCustomValidity('Please enter exactly 10 digits')"
+                          oninput="this.setCustomValidity('')" />
                       </div>
                       <div class="form-group">
                         <label for="Teacher-Subject">Subject</label>
@@ -106,15 +120,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Enter the Email of the Teacher" required>
+                        <input type="email" name="email" maxlength="30"
+                          class="form-control" placeholder="Enter the Email of the Teacher" required>
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Phone</label>
-                        <input type="text" name="phone" class="form-control" maxlength="10" inputmode="numeric" pattern="[0-9]*" placeholder="Enter the Phone Number" required>
+                        <input
+                          type="text"
+                          name="phone"
+                          class="form-control"
+                          maxlength="10"
+                          minlength="10"
+                          inputmode="numeric"
+                          pattern="\d{10}"
+                          placeholder="Enter 10-digit Phone Number"
+                          required
+                          oninvalid="this.setCustomValidity('Please enter exactly 10 digits')"
+                          oninput="this.setCustomValidity('')" />
                       </div>
+                      <!-- Password -->
                       <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" minlength="8" placeholder="Enter the Password" required>
+                        <div class="input-group">
+                          <input type="password" name="password" id="passwordInput" class="form-control"
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+                            required placeholder="Enter a strong password">
+                          <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">Show</button>
+                        </div>
+                        <div id="passwordStrengthText" class="mt-1"></div>
+                        <div class="progress mt-1" style="height: 5px;">
+                          <div id="passwordStrengthBar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+                        </div>
                       </div>
                       <div class="d-flex justify-content-between">
                         <a href="../pages/teachers.php" style="color: white; text-decoration: none;">

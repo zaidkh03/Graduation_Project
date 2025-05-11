@@ -1,4 +1,6 @@
 <?php
+require_once '../../login/auth/init.php';
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -69,15 +71,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <form method="POST">
                     <div class="form-group">
                       <label for="Parent-Name">Name</label>
-                      <input type="text" class="form-control" id="Parent-Name" name="name" value="<?= htmlspecialchars($parent['name']) ?>" required />
+                      <input type="text" class="form-control" id="Parent-Name" name="name" value="<?= htmlspecialchars($parent['name']) ?>" maxlength="30" required />
                     </div>
                     <div class="form-group">
                       <label for="Parent-Email">Email</label>
-                      <input type="email" class="form-control" id="Parent-Email" name="email" value="<?= htmlspecialchars($parent['email']) ?>" required />
+                      <input type="email" class="form-control" id="Parent-Email" name="email" value="<?= htmlspecialchars($parent['email']) ?>" maxlength="30" required />
                     </div>
                     <div class="form-group">
                       <label for="Parent-Phone">Phone Number</label>
-                      <input type="text" class="form-control" id="Parent-Phone" name="phone" value="<?= htmlspecialchars($parent['phone']) ?>" required />
+                      <input type="text" class="form-control" id="parent-Phone" name="phone" value="<?= htmlspecialchars($parent['phone']) ?>" maxlength="10" minlength="10" inputmode="numeric" pattern="\d{10}" oninvalid="this.setCustomValidity('Please enter exactly 10 digits')" required />
                     </div>
                     <div class="d-flex justify-content-between">
                       <a href="../pages/parents.php" class="btn btn-secondary">Cancel</a>
