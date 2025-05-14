@@ -10,6 +10,7 @@ if ($user['role'] !== 'admin') {
 
 $adminId = $user['related_id'];
 $adminrole = $user['role'];
+$table = 'admin';
 
 include_once '../../db_connection.php';
 
@@ -73,7 +74,25 @@ $adminData = $result->fetch_assoc();
         <?= strtoupper(substr($adminData['name'], 0, 2)) ?>
       </div>
       <div class="info flex-grow-1 text-truncate">
-        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php echo htmlspecialchars($fullName); ?></a>
+        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php  
+        // Prepare the SQL query to select all data from the specified table
+    $sql = "SELECT * FROM $table WHERE id = $adminId";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die("Query failed: " . $conn->error);
+    }
+
+    // check if the result has any rows
+    if (mysqli_num_rows($result) > 0) {
+
+        // print the data in the section you call it once 
+        while ($row = $result->fetch_assoc()) {
+            echo "{$row['name']}";
+        }
+    } else {
+        echo "No data found.";
+    } ?></a>
       </div>
     </div>
 

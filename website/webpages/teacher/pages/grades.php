@@ -66,20 +66,40 @@ $teacherData = $result->fetch_assoc();
                         id="filterSemester"
                         class="form-control form-control-sm">
                         <option value="">Select Semester</option>
-                        <option value="semester1">Semester 1</option>
-                        <option value="semester2">Semester 2</option>
+                        <option value="s1">Semester 1</option>
+                        <option value="s2">Semester 2</option>
                       </select>
                     </div>
                     <div class="col-md-4">
                       <label for="filterClass">Select the Class</label>
-                      <select
-                        id="filterClass"
-                        class="form-control form-control-sm">
-                        <option value="">Select Class</option>
-                        <option value="class10">10-B</option>
-                        <option value="class11">11-C</option>
-                        <option value="class12">12-A</option>
-                      </select>
+                      <?php
+                      $sql = "
+    SELECT c.id, c.grade, c.section
+    FROM teacher_subject_class tc
+    INNER JOIN class c ON tc.class_id = c.id
+    WHERE tc.teacher_id = ?
+";
+
+                      $stmt = $conn->prepare($sql);
+                      if (!$stmt) {
+                        die("SQL error: " . $conn->error);
+                      }
+
+                      $stmt->bind_param("i", $teacherId);
+                      $stmt->execute();
+
+                      $result = $stmt->get_result();
+
+                      echo "<select id='filterClass' class='form-control form-control-sm'>";
+                      echo "<option value=''>Select Class</option>";
+
+                      while ($row = $result->fetch_assoc()) {
+                        echo "<option value='{$row['id']}'>{$row['grade']}-{$row['section']}</option>";
+                      }
+
+                      echo "</select>";
+                      $stmt->close();
+                      ?>
                     </div>
                   </div>
 
@@ -105,21 +125,21 @@ $teacherData = $result->fetch_assoc();
                     </thead>
                     <tbody>
                       <tr>
-                        <td contenteditable="true">John Doe</td>
+                        <td>John Doe</td>
                         <td contenteditable="true">17</td>
                         <td contenteditable="true">18</td>
                         <td contenteditable="true">16</td>
                         <td contenteditable="true">35</td>
                       </tr>
                       <tr>
-                        <td contenteditable="true">Jane Smith</td>
+                        <td>Jane Smith</td>
                         <td contenteditable="true">15</td>
                         <td contenteditable="true">17</td>
                         <td contenteditable="true">18</td>
                         <td contenteditable="true">34</td>
                       </tr>
                       <tr>
-                        <td contenteditable="true">Michael Brown</td>
+                        <td>Michael Brown</td>
                         <td contenteditable="true">19</td>
                         <td contenteditable="true">18</td>
                         <td contenteditable="true">17</td>
@@ -145,6 +165,94 @@ $teacherData = $result->fetch_assoc();
   <?php include_once '../components/scripts.php'; ?>
   <!-- // Include the charts data component -->
   <?php include_once '../components/chartsData.php'; ?>
+  <script>
+    function loadGrades() {
+  const classId = $('#filterClass').val();
+  const semester = $('#filterSemester').val();
+
+  if (!classId || !semester) return;
+
+  $.post('fetch_grades.php', {
+    class_id: classId,
+    semester: semester
+  }, function (res) {
+    const data = JSON.parse(res);
+    const students = data.students;
+
+    const tbody = $('#example1 tbody');
+    tbody.empty();
+
+    students.forEach(stu => {
+      const row = `
+        <tr data-student-id="${stu.student_id}">
+          <td>${stu.name}</td>
+          <td contenteditable="true">${stu.marks[0] ?? ''}</td>
+          <td contenteditable="true">${stu.marks[1] ?? ''}</td>
+          <td contenteditable="true">${stu.marks[2] ?? ''}</td>
+          <td contenteditable="true">${stu.marks[3] ?? ''}</td>
+        </tr>`;
+      tbody.append(row);
+    });
+  });
+}
+
+$('#filterClass, #filterSemester').change(loadGrades);
+
+  </script>
+
+  <script type="text/javascript">
+    $('#saveGradesBtn').click(function () {
+  const classId = $('#filterClass').val();
+  const semester = $('#filterSemester').val();
+  if (!classId || !semester) {
+    alert('Please select both semester and class.');
+    return;
+  }
+
+  let grades = [];
+
+  $('#example1 tbody tr').each(function () {
+    const row = $(this);
+    const studentId = row.data('student-id');
+
+    const first = row.find('td:eq(1)').text().trim();
+    const second = row.find('td:eq(2)').text().trim();
+    const participation = row.find('td:eq(3)').text().trim();
+    const final = row.find('td:eq(4)').text().trim();
+
+    grades.push({
+      student_id: studentId,
+      marks: [
+        parseFloat(first),
+        parseFloat(second),
+        parseFloat(participation),
+        parseFloat(final)
+      ]
+    });
+  });
+
+  $.ajax({
+    url: 'save_grades.php',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      class_id: classId,
+      semester: semester,
+      grades: grades
+    }),
+    success: function (res) {
+      alert('Grades saved successfully!');
+    },
+    error: function (xhr) {
+      console.error(xhr.responseText);
+      alert('Error saving grades.');
+    }
+  });
+});
+
+
+
+  </script>
 </body>
 
 </html>

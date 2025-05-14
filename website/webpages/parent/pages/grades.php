@@ -63,14 +63,29 @@ $parentData = $result->fetch_assoc();
                   <div class="row mb-3 justify-content-center">
                     <div class="col-md-4">
                       <label for="filterClass">Select the Year</label>
-                      <select
-                        id="filterClass"
-                        class="form-control form-control-sm">
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                      </select>
+                      <?php 
+                      // Prepare and execute SQL query
+$sql = "SELECT * FROM school_year";
+$result = $conn->query($sql);
+
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
+
+// Output a single <select> element
+echo "<select id='filterClass' class='form-control form-control-sm' onchange='view_class()'>";
+
+if(mysqli_num_rows($result) > 0) {
+    // Loop through the results and create <option>s
+    while ($row = $result->fetch_assoc()) {
+        // Change 'id' and 'name' to match your actual column names
+        echo "<option value='{$row['id']}'>{$row['year']}</option>";
+    }
+} else {
+    echo "<option value=''>No data available</option>";
+}
+
+echo "</select>";?>
                     </div>
                     <div class="col-md-4">
                       <label for="filterSection">Select the Semester</label>
@@ -99,6 +114,32 @@ $parentData = $result->fetch_assoc();
                       </tr>
                     </thead>
                     <tbody>
+                      <?php 
+                      $sql = "SELECT
+    students.name AS student_name,
+    year.year_name AS school_year,
+    subjects.name AS subject_name,
+    mark_data->>'first' AS first_mark,
+    mark_data->>'second' AS second_mark,
+    mark_data->>'third' AS third_mark,
+    mark_data->>'final' AS final_mark
+FROM
+    parents p
+JOIN
+    students s ON s.parent_id = p.$parentId
+JOIN
+    academic_record ar ON ar.student_id = s.id
+JOIN
+    school_year sy ON ar.school_year_id = sy.id,
+    LATERAL jsonb_each(ar.marks -> :semester) AS subject_entry(subject_id, mark_data)
+JOIN
+    subject subj ON subj.id::text = subject_entry.subject_id
+WHERE
+    p.id = :parent_id
+    AND s.id = :student_id
+    AND sy.id = :school_year_id;
+ "
+                       ?>
                       <tr>
                         <td>Mathematics</td>
                         <td>85</td>

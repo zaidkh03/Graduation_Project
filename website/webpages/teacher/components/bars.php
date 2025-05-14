@@ -19,10 +19,10 @@ $stmt->execute();
 $result = $stmt->get_result();
 $teacherData = $result->fetch_assoc();
 ?>
-<!-- Preloader -->
+<!-- Preloader 
 <div class="preloader flex-column justify-content-center align-items-center">
   <img class="animation__shake" src="../../../dist/img/logo.png" alt="AdminLTELogo" height="60" width="60">
-</div>
+</div>-->
 
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed-top">
@@ -76,7 +76,25 @@ $teacherData = $result->fetch_assoc();
         <?= strtoupper(substr($teacherData['name'], 0, 2)) ?>
       </div>
       <div class="info flex-grow-1 text-truncate">
-        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php profile_dash_data($table,'name',$teacherId); ?></a>
+        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php  
+        // Prepare the SQL query to select all data from the specified table
+    $sql = "SELECT * FROM $table WHERE id = $teacherId";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die("Query failed: " . $conn->error);
+    }
+
+    // check if the result has any rows
+    if (mysqli_num_rows($result) > 0) {
+
+        // print the data in the section you call it once 
+        while ($row = $result->fetch_assoc()) {
+            echo "{$row['name']}";
+        }
+    } else {
+        echo "No data found.";
+    } ?></a>
       </div>
     </div>
 

@@ -66,13 +66,7 @@ $parentData = $result->fetch_assoc();
                   <div class="row mb-3">
                     <div class="col-md-4">
                       <label for="filterCapacity">Select the Student</label>
-                      <?php //select_Data('students','name',$parentId,'parent_id') ?>
-                      <select
-                        id="filterCapacity"
-                        class="form-control form-control-sm">
-                        <option value="student2">Student 1</option>
-                        <option value="student2">Student 2</option>
-                      </select>
+                      <?php select_Data('students','name',$parentId,'parent_id') ?>
                     </div>
                   </div>
                   <!--Table -->

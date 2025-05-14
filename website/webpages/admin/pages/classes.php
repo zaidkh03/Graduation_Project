@@ -1,25 +1,31 @@
 <?php
 require_once '../../login/auth/init.php';
 
-// Include the database connection
-include_once '../../db_connection.php';
 
-// Fetch classes
-$query = "SELECT c.id, 
-                c.grade, 
-                c.section, 
-                c.capacity,
-                c.students_json,
-                c.subject_teacher_map,
-                s.name AS school_name,
-                t.name AS mentor_name
-         FROM class c
-         LEFT JOIN school s ON c.school_id = s.id
-         LEFT JOIN teachers t ON c.mentor_teacher_id = t.id
-         ORDER BY c.grade, c.section";
-$result = mysqli_query($conn, $query);
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Include database connection
+include '../../db_connection.php';
+
+// Fetch all parents from the database
+$sql = "
+SELECT 
+    p.id,
+    p.name,
+    p.national_id,
+    p.email,
+    p.phone,
+    COUNT(s.id) AS student_count
+FROM parents p
+LEFT JOIN students s ON s.parent_id = p.id
+GROUP BY p.id, p.name, p.national_id, p.email, p.phone
+ORDER BY p.id ASC
+";
+
+$result = $conn->query($sql);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,6 +113,25 @@ $result = mysqli_query($conn, $query);
                   </thead>
                   <tbody>
                   <?php
+                  require_once '../../login/auth/init.php';
+
+// Include the database connection
+include_once '../../db_connection.php';
+
+// Fetch classes
+$query = "SELECT c.id, 
+                c.grade, 
+                c.section, 
+                c.capacity,
+                c.students_json,
+                c.subject_teacher_map,
+                s.name AS school_name,
+                t.name AS mentor_name
+         FROM class c
+         LEFT JOIN school s ON c.school_id = s.id
+         LEFT JOIN teachers t ON c.mentor_teacher_id = t.id
+         ORDER BY c.grade, c.section";
+$result = mysqli_query($conn, $query);
                   if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                       $studentCount = 0;

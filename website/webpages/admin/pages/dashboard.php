@@ -1,4 +1,26 @@
-<?php include_once '../../login/auth/init.php'; ?>
+<?php
+require_once '../../login/auth/auth.php';
+requireRole('admin');
+
+$user = getCurrentUser();
+$teacherId = $user['related_id'];
+include_once '../../db_connection.php';
+
+$query = "
+  SELECT 
+    students.id, 
+    students.name AS student_name,
+    students.parent_id,
+    class.grade,
+    class.section
+  FROM students
+  LEFT JOIN academic_record ON academic_record.student_id = students.id
+  LEFT JOIN class ON academic_record.class_id = class.id
+  ORDER BY students.name ASC
+";
+
+$result = mysqli_query($conn, $query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 

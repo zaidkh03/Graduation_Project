@@ -1,4 +1,25 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+// Include session + role protection + get $adminId
+require_once '../../login/auth/init.php';
+if ($user['role'] !== 'admin') {
+  header("Location: ../../login/login.php");
+  exit();
+}
+
+$parentId =  $user['related_id'];
+$table = 'parents';
+include_once '../../db_connection.php';
+
+// Fetch admin data using the related ID
+$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM admin WHERE id = ?");
+$stmt->bind_param("i", $parentId);
+$stmt->execute();
+$result = $stmt->get_result();
+$adminData = $result->fetch_assoc();
+?>
+<?php
 require_once '../../login/auth/auth.php';
 requireRole('admin');
 

@@ -10,11 +10,12 @@ if ($user['role'] !== 'admin') {
 
 $adminId = $user['related_id'];
 $adminrole = $user['role'];
+$table = 'admin';
 
 include_once '../../db_connection.php';
 
 // Fetch admin data using the related ID
-$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM admins WHERE id = ?");
+$stmt = $conn->prepare("SELECT name, national_id, phone, email FROM admin WHERE id = ?");
 $stmt->bind_param("i", $adminId);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -65,22 +66,22 @@ $adminData = $result->fetch_assoc();
               <?= strtoupper(substr($adminData['name'], 0, 2)) ?>
             </div>
             <div class="profile-info">
-              <strong><?php profile_dash_data($adminrole,'name',$adminId) ?></strong><br />
+              <strong><?php profile_dash_data($table,'name',$adminId) ?></strong><br />
               <small><?= ucfirst($user['role']) ?></small>
               </div>
           </div>
           <div class="info-grid">
             <div class="info-card">
               <h3><i class="fas fa-address-card"></i> National ID</h3>
-              <p><?php profile_dash_data($adminrole,'national_id',$adminId) ?></p>
+              <p><?php profile_dash_data($table,'national_id',$adminId) ?></p>
             </div>
             <div class="info-card">
               <h3><i class="fas fa-phone"></i> Phone Number</h3>
-              <p><?php profile_dash_data($adminrole,'phone',$adminId )?></p>
+              <p><?php profile_dash_data($table,'phone',$adminId )?></p>
             </div>
             <div class="info-card">
               <h3><i class="fas fa-envelope"></i> Email</h3>
-              <p><?php profile_dash_data($adminrole,'email',$adminId )?></p>
+              <p><?php profile_dash_data($table,'email',$adminId )?></p>
             </div>
           </div>
         </div>

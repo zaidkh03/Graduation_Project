@@ -9,6 +9,7 @@ if ($user['role'] !== 'student') {
 }
 
 $studentId =  $user['related_id'];
+$role = $user['role'];
 $table = 'students';
 include_once '../../db_connection.php';
 
@@ -48,7 +49,7 @@ $studentData = $result->fetch_assoc();
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">15 Notifications</span>
           <?php include_once'../../readData.php';
-          notifications($studentId);?>
+          notifications($studentId,$role);?>
         </div>
       </li>
       <li class="nav-item">
@@ -87,7 +88,25 @@ $studentData = $result->fetch_assoc();
                 <?= strtoupper(substr($studentData['name'], 0, 2)) ?>
       </div>
       <div class="info flex-grow-1 text-truncate">
-        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php profile_dash_data( $table,'name',$studentId) ?></a>
+        <a href="../pages/profile.php" class="d-block text-white text-wrap"><?php  
+        // Prepare the SQL query to select all data from the specified table
+    $sql = "SELECT * FROM $table WHERE id = $studentId";
+    $result = $conn->query($sql);
+
+    if (!$result) {
+        die("Query failed: " . $conn->error);
+    }
+
+    // check if the result has any rows
+    if (mysqli_num_rows($result) > 0) {
+
+        // print the data in the section you call it once 
+        while ($row = $result->fetch_assoc()) {
+            echo "{$row['name']}";
+        }
+    } else {
+        echo "No data found.";
+    } ?></a>
       </div>
     </div>
 
