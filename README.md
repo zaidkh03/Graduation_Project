@@ -1,3 +1,0 @@
-# finalVersion
-
-School Management System
