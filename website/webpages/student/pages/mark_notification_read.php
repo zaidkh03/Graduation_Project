@@ -7,7 +7,7 @@ $role = 'student';
 $notificationId = $_POST['id'] ?? null;
 
 if ($notificationId) {
-    $stmt = $conn->prepare("SELECT read_by FROM notifications WHERE id = ?");
+    $stmt = $conn->prepare("SELECT read_by FROM notifications WHERE id = ? ");
     $stmt->bind_param("i", $notificationId);
     $stmt->execute();
     $stmt->bind_result($read_by_json);

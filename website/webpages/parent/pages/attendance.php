@@ -7,12 +7,38 @@ $parentId = $_SESSION['related_id'];
 
 function getStudentsForParent($parentId, $conn)
 {
-    $stmt = $conn->prepare("SELECT id, name FROM students WHERE parent_id = ?");
-    $stmt->bind_param("i", $parentId);
+    // Step 1: Get max school year ID
+    $maxYearResult = $conn->query("SELECT MAX(id) AS max_school_year_id FROM school_year");
+    $maxYearRow = $maxYearResult->fetch_assoc();
+    $maxSchoolYearId = $maxYearRow['max_school_year_id'] ?? 0;
+    if (!$maxSchoolYearId) {
+        return [];
+    }
+
+    // Step 2: Fetch students with latest academic record for that year and class not archived
+    $sql = "
+        SELECT s.id, s.name
+        FROM students s
+        JOIN academic_record a ON a.student_id = s.id
+        JOIN class c ON c.id = a.class_id
+        WHERE s.parent_id = ?
+          AND a.school_year_id = ?
+          AND a.id = (
+              SELECT MAX(id) FROM academic_record a2 WHERE a2.student_id = s.id AND a2.school_year_id = a.school_year_id
+          )
+          AND c.archived = 0
+        GROUP BY s.id, s.name
+    ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $parentId, $maxSchoolYearId);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $students = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+
+    return $students;
 }
+
 
 function getAcademicRecord($studentId, $conn)
 {

@@ -102,7 +102,7 @@
         $isMentor = false;
         if ($_SESSION['role'] === 'teacher') {
           $teacherId = $_SESSION['related_id'] ?? null;
-          $stmt = $conn->prepare("SELECT COUNT(*) FROM class WHERE mentor_teacher_id = ?");
+          $stmt = $conn->prepare("SELECT COUNT(*) FROM class WHERE mentor_teacher_id = ? AND archived = 0");
           $stmt->bind_param("i", $teacherId);
           $stmt->execute();
           $stmt->bind_result($count);

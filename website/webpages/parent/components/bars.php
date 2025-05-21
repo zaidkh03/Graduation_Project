@@ -150,21 +150,27 @@
     xhttp.send();
   }
 
-  function openNotification(id, title, message, isRead) {
-    document.getElementById("notificationTitle").innerText = title;
-    document.getElementById("notificationMessage").innerText = message;
-    $('#notificationModal').modal('show');
-
-    if (!isRead) {
-      const xhttp = new XMLHttpRequest();
-      xhttp.onload = function() {
-        loadNotifications(); // reload to update read status
-      };
-      xhttp.open("POST", "../pages/mark_notification_read.php", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("id=" + encodeURIComponent(id));
-    }
+  function openNotification(id, title, message, isRead, sender = null) {
+  let displayMessage = message;
+  if (sender) {
+    displayMessage = `<small><strong>From: ${sender}</strong></small><br><br>` + message;
   }
+
+  document.getElementById("notificationTitle").innerText = title;
+  document.getElementById("notificationMessage").innerHTML = displayMessage;
+  $('#notificationModal').modal('show');
+
+  if (!isRead) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+      loadNotifications(); // reload to update read status
+    };
+    xhttp.open("POST", "../pages/mark_notification_read.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id=" + encodeURIComponent(id));
+  }
+}
+
 
   document.addEventListener('DOMContentLoaded', loadNotifications);
 </script>

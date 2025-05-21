@@ -106,7 +106,7 @@ $avg_attendance_percent = $attendance_counts['total'] > 0 ? round(($attendance_c
 // Notifications unread count
 $unread_count = 0;
 $notifications_result = mysqli_query($conn, "
-  SELECT user_id, read_by, sender_id FROM notifications WHERE sender_id = $teacher_id
+  SELECT user_id, read_by, sender_id FROM notifications WHERE sender_id = $teacher_id AND archived = 0
 ");
 while ($notif = mysqli_fetch_assoc($notifications_result)) {
     $user_ids = json_decode($notif['user_id'], true) ?: [];
@@ -131,28 +131,35 @@ $bar_chart_labels = [];
 $bar_chart_data = [];
 
 foreach ($teaching_classes as $class_id => $students_in_class) {
-    if (empty($students_in_class)) continue;
+  if (empty($students_in_class)) continue;
 
-    $total_class_percentage = 0;
-    $students_with_marks = 0;
+  // Fetch grade and section for the class
+  $classResult = mysqli_query($conn, "SELECT grade, section FROM class WHERE id = $class_id LIMIT 1");
+  $classInfo = mysqli_fetch_assoc($classResult);
+  $grade = $classInfo['grade'] ?? 'Unknown Grade';
+  $section = $classInfo['section'] ?? 'Unknown Section';
 
-    foreach ($students_in_class as $student_id) {
-        $sql = "SELECT marks_json FROM academic_record WHERE student_id = $student_id AND school_year_id = $latest_year";
-        $result = mysqli_query($conn, $sql);
-        if ($row = mysqli_fetch_assoc($result)) {
-            $marks_json = json_decode($row['marks_json'], true);
-            $student_percentage = calculate_student_normalized_mark($marks_json, $teacher_subject_id, $max_points_per_part);
-            if ($student_percentage > 0) {
-                $total_class_percentage += $student_percentage;
-                $students_with_marks++;
-            }
-        }
-    }
+  $total_class_percentage = 0;
+  $students_with_marks = 0;
 
-    $avg_class_percentage = $students_with_marks > 0 ? round($total_class_percentage / $students_with_marks, 2) : 0;
-    $bar_chart_labels[] = "Class $class_id";
-    $bar_chart_data[] = $avg_class_percentage;
+  foreach ($students_in_class as $student_id) {
+      $sql = "SELECT marks_json FROM academic_record WHERE student_id = $student_id AND school_year_id = $latest_year";
+      $result = mysqli_query($conn, $sql);
+      if ($row = mysqli_fetch_assoc($result)) {
+          $marks_json = json_decode($row['marks_json'], true);
+          $student_percentage = calculate_student_normalized_mark($marks_json, $teacher_subject_id, $max_points_per_part);
+          if ($student_percentage > 0) {
+              $total_class_percentage += $student_percentage;
+              $students_with_marks++;
+          }
+      }
+  }
+
+  $avg_class_percentage = $students_with_marks > 0 ? round($total_class_percentage / $students_with_marks, 2) : 0;
+  $bar_chart_labels[] = "$grade - $section";
+  $bar_chart_data[] = $avg_class_percentage;
 }
+
 
 // Prepare attendance trend for teaching classes - simplified last 7 days aggregate presence %
 $attendance_trend_labels = [];
