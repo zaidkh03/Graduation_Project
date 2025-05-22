@@ -202,7 +202,7 @@ if (!empty($gradingStatus['S1']['semester_total']) && !empty($gradingStatus['S2'
 
         if ($currentGrade >= 12) {
           // Mark student as finished if they are in grade 12 or above
-          $conn->query("UPDATE students SET status = 'finished' WHERE id = $sid");
+          $conn->query("UPDATE students SET status = 'Inactive' WHERE id = $sid");
         } else {
           // Otherwise increment the grade as usual
           $conn->query("UPDATE students SET current_grade = current_grade + 1 WHERE id = $sid");

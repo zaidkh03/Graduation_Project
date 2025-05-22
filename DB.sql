@@ -1,7 +1,8 @@
--- ===========================
--- ✅ FINAL DB SCHEMA (CLEAN + JSON INTEGRATED)
--- Based on full project use-case (admin, teacher, parent, student)
--- ===========================
+-- =================================
+-- Madrasati Data Base Schema Design
+-- =================================
+
+--IMPORTANT: Name the DATABASE in the phpMyAdmin as 'madrasati'
 
 -- 1. ADMINS
 CREATE TABLE admin (
@@ -10,15 +11,17 @@ CREATE TABLE admin (
   national_id VARCHAR(30) NOT NULL UNIQUE,
   email VARCHAR(30) UNIQUE NOT NULL,
   phone VARCHAR(30) UNIQUE NOT NULL,
-  admin_dashboard_data JSON -- ✅ admin dashboard analytics
 );
 
 -- 2. SCHOOL
 CREATE TABLE school (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
   location VARCHAR(30) NOT NULL,
-  admin_id BIGINT,
+  admin_id BIGINT(20) NULL,
+  phone VARCHAR(20) NULL,
+  email VARCHAR(100) NULL,
+  website VARCHAR(255) NULL,
   FOREIGN KEY (admin_id) REFERENCES admin(id)
 );
 
@@ -30,10 +33,10 @@ CREATE TABLE school_year (
 
 -- 4. SUBJECTS
 CREATE TABLE subjects (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL UNIQUE,
-  description VARCHAR(100),
-  book_name VARCHAR(30)
+  description VARCHAR(100) NULL,
+  pdf_path VARCHAR(255) NULL
 );
 
 -- 5. TEACHERS
@@ -41,14 +44,13 @@ CREATE TABLE teachers (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
   national_id VARCHAR(30) NOT NULL UNIQUE,
-  subject_id BIGINT, -- ✅ Main subject specialization
+  subject_id BIGINT,
   email VARCHAR(30) UNIQUE NOT NULL,
   phone VARCHAR(30) UNIQUE NOT NULL,
-  teacher_dashboard_data JSON, -- ✅ Teacher dashboard and quick view data
   FOREIGN KEY (subject_id) REFERENCES subjects(id)
 );
 
--- 7. CLASS
+-- 6. CLASS
 CREATE TABLE class (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   school_id BIGINT NOT NULL,
@@ -57,15 +59,16 @@ CREATE TABLE class (
   section VARCHAR(10) NOT NULL,
   capacity INT NOT NULL,
   mentor_teacher_id BIGINT,
-  students_json JSON, -- ✅ list of assigned students
-  subject_teacher_map JSON, -- ✅ links subject names or IDs to teacher IDs
-  grading_status_json JSON, -- ✅ JSON object to track grading status
+  students_json JSON,
+  subject_teacher_map JSON,
+  grading_status_json JSON,
+  archived TINYINT(1) DEFAULT 0,
   FOREIGN KEY (school_id) REFERENCES school(id),
   FOREIGN KEY (school_year_id) REFERENCES school_year(id),
   FOREIGN KEY (mentor_teacher_id) REFERENCES teachers(id)
 );
 
--- 6. TEACHER ASSIGNMENT
+-- 7. TEACHER ASSIGNMENT
 CREATE TABLE teacher_subject_class (
   teacher_id BIGINT,
   subject_id BIGINT,
@@ -76,7 +79,7 @@ CREATE TABLE teacher_subject_class (
   FOREIGN KEY (class_id) REFERENCES class(id)
 );
 
--- 9. PARENTS
+-- 8. PARENTS
 CREATE TABLE parents (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
@@ -85,7 +88,7 @@ CREATE TABLE parents (
   phone VARCHAR(30) NOT NULL UNIQUE
 );
 
--- 8. STUDENTS
+-- 9. STUDENTS
 CREATE TABLE students (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
@@ -96,7 +99,6 @@ CREATE TABLE students (
   current_grade INT,
   status ENUM('Active', 'Inactive') DEFAULT 'Active',
   parent_id BIGINT NOT NULL,
-  student_dashboard_data JSON, -- ✅ profile/dashboard data cache
   FOREIGN KEY (parent_id) REFERENCES parents(id)
 );
 
@@ -106,38 +108,29 @@ CREATE TABLE academic_record (
   student_id BIGINT NOT NULL,
   class_id BIGINT NOT NULL,
   school_year_id BIGINT NOT NULL,
-  marks_json JSON,        -- ✅ subject -> semester -> marks
-  attendance_json JSON,   -- ✅ subject -> dates
+  marks_json JSON,
+  attendance_json JSON,
+  attendance_response_json JSON DEFAULT '{}',
   FOREIGN KEY (student_id) REFERENCES students(id),
   FOREIGN KEY (class_id) REFERENCES class(id),
   FOREIGN KEY (school_year_id) REFERENCES school_year(id)
 );
 
--- 11. ATTENDANCE AGREEMENT (for parent approval)
-CREATE TABLE agreement (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  academic_record_id BIGINT,
-  subject_id BIGINT,
-  date DATE,
-  parent_id BIGINT,
-  reason VARCHAR(100),
-  status ENUM('Approved', 'Rejected') DEFAULT 'Approved',
-  FOREIGN KEY (academic_record_id) REFERENCES academic_record(id),
-  FOREIGN KEY (subject_id) REFERENCES subjects(id),
-  FOREIGN KEY (parent_id) REFERENCES parents(id)
-);
-
--- 12. NOTIFICATIONS
+-- 11. NOTIFICATIONS
 CREATE TABLE notifications (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  user_id BIGINT NOT NULL,
-  user_role ENUM('Admin','Teacher','Student','Parent'),
-  message TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+  sender_id BIGINT(20) NOT NULL,
+  user_id VARCHAR(100) NOT NULL,
+  message TEXT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  send_to INT(11) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  read_by TEXT NULL DEFAULT NULL,
+  archived TINYINT(1) NOT NULL DEFAULT 0
 );
 
--- 13. USERS (Login Management)
+-- 12. USERS (Login Management)
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   national_id VARCHAR(30) NOT NULL UNIQUE,
@@ -145,14 +138,5 @@ CREATE TABLE users (
   role ENUM('admin','student','teacher','parent') NOT NULL,
   related_id INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
--- 14. ANALYTICS CACHE
-CREATE TABLE school_analytics_json (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  school_year_id BIGINT,
-  report_type VARCHAR(30),
-  data JSON,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
