@@ -120,13 +120,13 @@ CREATE TABLE academic_record (
 CREATE TABLE notifications (
   id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
   sender_id BIGINT(20) NOT NULL,
-  user_id VARCHAR(100) NOT NULL,
+  user_id JSON NOT NULL,
   message TEXT NOT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   send_to INT(11) NOT NULL,
   title VARCHAR(255) NOT NULL,
-  read_by TEXT NULL DEFAULT NULL,
+  read_by JSON NULL DEFAULT NULL,
   archived TINYINT(1) NOT NULL DEFAULT 0
 );
 
