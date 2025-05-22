@@ -2,15 +2,15 @@
 -- Madrasati Data Base Schema Design
 -- =================================
 
---IMPORTANT: Name the DATABASE in the phpMyAdmin as 'madrasati'
+-- IMPORTANT: Name the DATABASE in the phpMyAdmin as 'madrasati'
 
 -- 1. ADMINS
-CREATE TABLE admin (
+CREATE TABLE admins (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
   national_id VARCHAR(30) NOT NULL UNIQUE,
   email VARCHAR(30) UNIQUE NOT NULL,
-  phone VARCHAR(30) UNIQUE NOT NULL,
+  phone VARCHAR(30) UNIQUE NOT NULL
 );
 
 -- 2. SCHOOL
@@ -22,7 +22,7 @@ CREATE TABLE school (
   phone VARCHAR(20) NULL,
   email VARCHAR(100) NULL,
   website VARCHAR(255) NULL,
-  FOREIGN KEY (admin_id) REFERENCES admin(id)
+  FOREIGN KEY (admin_id) REFERENCES admins(id)
 );
 
 -- 3. SCHOOL YEAR

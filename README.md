@@ -1,1 +1,5 @@
-Madrasati Graduation Project
+# Madrasati
+
+University Graduation Project
+
+School Management System
